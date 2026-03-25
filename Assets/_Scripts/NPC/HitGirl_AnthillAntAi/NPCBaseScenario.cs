@@ -11,5 +11,7 @@ public enum NPCBaseScenario
     Satisfied = 8,
     Shoved = 9,
     HeardSound = 10,
-    SleepingAlly = 11
+    SleepingAlly = 11,
+    HasWeapon = 12,
+    InRangeToAttack = 13
 }

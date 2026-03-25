@@ -3,6 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewWeapon", menuName = "Weapons/Weapon")]
 public class WeaponSO : ScriptableObject
 {
+    public GameObject weaponPrefab;
+    
     public float range;
     public float fireRate;
 

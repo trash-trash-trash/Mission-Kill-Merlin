@@ -58,7 +58,19 @@
 // }
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+
+[Serializable]
+public enum HealthStatus
+{
+    Burning,
+    Wet,
+    Asleep,
+    Dead
+}
 
 public class Health : MonoBehaviour
 {
@@ -73,7 +85,7 @@ public class Health : MonoBehaviour
     private int currentHP;
     
     [SerializeField]
-    private int maxHP = 1;
+    public int maxHP = 1;
 
     [SerializeField]
     private bool alive = false;
@@ -84,18 +96,37 @@ public class Health : MonoBehaviour
         set => alive = value;
     }
 
-    [SerializeField] 
-    private HealthStatus healthStatus;
+    [SerializeField]
+    private List<HealthStatus> statuses = new();
 
-    public HealthStatus _healthStatus
+    public IReadOnlyList<HealthStatus> Statuses => statuses;
+
+    void OnEnable()
     {
-        get { return healthStatus; }
-        set
-        {
-            healthStatus = value;
-            AnnounceHealthStatus?.Invoke(healthStatus);
-        }
+        StartCoroutine(CheckBurning());
     }
+
+    public void AddStatus(HealthStatus s)
+    {
+            statuses.Add(s);
+            AnnounceHealthStatus?.Invoke(s);
+    }
+    
+    public int CountStatus(HealthStatus s)
+    {
+        int count = 0;
+        foreach (var status in statuses)
+            if (status == s) count++;
+        return count;
+    }
+
+    public void RemoveStatus(HealthStatus s)
+    {
+        if (statuses.Remove(s))
+            AnnounceHealthStatus?.Invoke(s);
+    }
+
+    public bool HasStatus(HealthStatus s) => statuses.Contains(s);
     public bool CanChangeHP { get; private set; } = true;
 
     public int CurrentHP
@@ -107,13 +138,12 @@ public class Health : MonoBehaviour
             Alive = currentHP > 0;
             CanChangeHP &= Alive;
             if (!Alive)
-                _healthStatus = HealthStatus.Dead;
+                AddStatus(HealthStatus.Dead);
             
             AnnounceHP?.Invoke(currentHP);
         }
     }
-
-
+    
     public virtual void ChangeHP(int value)
     {
         if (!CanChangeHP)
@@ -127,17 +157,41 @@ public class Health : MonoBehaviour
     {
         AnnounceHitByWeapon?.Invoke(weaponSo);
 
+        //probably not
         if (weaponSo.weaponDamage == 0)
-            _healthStatus = HealthStatus.Asleep;
+        {
+            if(Statuses.Contains(HealthStatus.Asleep))
+                RemoveStatus(HealthStatus.Asleep);
+            else
+                AddStatus(HealthStatus.Asleep);
+        }
         
         ChangeHP(weaponSo.weaponDamage);
     }
+
+    //TODO: Fix hardcoding values
+    IEnumerator CheckBurning()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+
+            if (!Alive)
+                continue;
+
+            if (Statuses.Contains(HealthStatus.Wet))
+            {
+                statuses.RemoveAll(s => s == HealthStatus.Burning);
+                continue;
+            }
+            
+            int burnCount = CountStatus(HealthStatus.Burning);
+            for (int i = 0; i < burnCount; i++)
+            {
+                yield return new WaitForFixedUpdate();
+                ChangeHP(-1);
+            }
+        }
+    }
 }
 
-[Serializable]
-public enum HealthStatus
-{
-    Fine,
-    Asleep,
-    Dead
-}

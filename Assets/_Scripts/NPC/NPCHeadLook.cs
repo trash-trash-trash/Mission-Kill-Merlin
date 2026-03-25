@@ -28,8 +28,8 @@ public class NPCHeadLook : MonoBehaviour
 
     private void Update()
     {
-       // Vector3 direction = lookingAtPointOfInterest ? pointOfInterest - head.position : agent.velocity;
-       // RotateHead(direction);
+        Vector3 direction = lookingAtPointOfInterest ? pointOfInterest - head.position : agent.velocity;
+        RotateHead(direction);
     }
 
     private void RotateHead(Vector3 direction)

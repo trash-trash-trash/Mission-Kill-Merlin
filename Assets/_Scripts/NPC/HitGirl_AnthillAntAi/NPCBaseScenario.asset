@@ -38,6 +38,10 @@ MonoBehaviour:
       name: HeardSound
     - id: 11
       name: SleepingAlly
+    - id: 12
+      name: HasWeapon
+    - id: 13
+      name: InRangeToAttack
   actions:
   - name: Death
     isDefault: 0
@@ -124,9 +128,13 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 6475810566758554060, guid: 8542e9f2856c3d4428575dce70823d75, type: 3}
     cost: 5
-    position: {x: 1428.3333, y: 177.66664}
+    position: {x: 1168.3333, y: 72.111115}
     pre:
     - id: 6
+      value: 1
+    - id: 5
+      value: 0
+    - id: 0
       value: 1
     post:
     - id: 8
@@ -213,6 +221,38 @@ MonoBehaviour:
     post:
     - id: 10
       value: 0
+  - name: MoveTowardsTarget
+    isDefault: 0
+    state: {fileID: 2851984434203013982, guid: 2cfe38e6ec0bc214db8b42d1faedd7c4, type: 3}
+    cost: 0
+    position: {x: 212.2222, y: 972.8889}
+    pre:
+    - id: 5
+      value: 1
+    - id: 13
+      value: 0
+    - id: 0
+      value: 1
+    post:
+    - id: 5
+      value: 0
+    - id: 13
+      value: 1
+  - name: Attack
+    isDefault: 0
+    state: {fileID: 6158492095482535897, guid: 3b8a40118f1266147b72a57e1c497174, type: 3}
+    cost: 0
+    position: {x: 420.00006, y: 977.3334}
+    pre:
+    - id: 12
+      value: 1
+    - id: 13
+      value: 1
+    - id: 0
+      value: 1
+    post:
+    - id: 5
+      value: 0
   goals:
   - name: Die
     isDefault: 0
@@ -230,12 +270,26 @@ MonoBehaviour:
       value: 1
     - id: 6
       value: 1
+    - id: 5
+      value: 0
+  - name: KillPlayer
+    isDefault: 0
+    position: {x: 723.3333, y: 1188.3334}
+    conditions:
+    - id: 0
+      value: 1
+    - id: 5
+      value: 1
+    - id: 4
+      value: 1
+    - id: 12
+      value: 1
   worldStates:
   - position: {x: 1048, y: 438.3333}
     isAutoUpdate: 1
     list:
     - id: 0
-      value: 1
+      value: 0
     - id: 1
       value: 1
     - id: 2
@@ -243,9 +297,9 @@ MonoBehaviour:
     - id: 3
       value: 0
     - id: 4
-      value: 0
+      value: 1
     - id: 5
-      value: 0
+      value: 1
     - id: 6
       value: 0
     - id: 7
@@ -258,3 +312,7 @@ MonoBehaviour:
       value: 0
     - id: 11
       value: 0
+    - id: 12
+      value: 1
+    - id: 13
+      value: 1

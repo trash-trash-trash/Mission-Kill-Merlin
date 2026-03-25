@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,13 @@ public class Memory : MonoBehaviour
     public bool heardSound = false;
     public bool deadAlly = false;
     public bool sleepingAlly = false;
+    public bool awareOfPlayer = false;
+    public event Action<List<MemoryData>> AnnounceMemory; 
 
     public void AddOrUpdateMemory(MemoryData mem)
     {
         // Check if we already have a memory of this character
-        if (memories.TryGetValue(mem.character, out var existing))
+        if (memories.TryGetValue(mem.character, out MemoryData existing))
         {
             // Update only if something has changed
             if (existing.memoryType != mem.memoryType || 
@@ -32,11 +35,9 @@ public class Memory : MonoBehaviour
         else
         {
             memories[mem.character] = mem;
-            knownCharacters.Add(mem.character);
-            memoriesList.Add(mem);
         }
-
-        if (mem.memoryType == MemoryEnum.Sound)
+        
+        // if (mem.memoryType == MemoryEnum.Sound)
             StartCoroutine(DecayMemory(mem));
         
         // Recalculate status flags
@@ -56,9 +57,9 @@ public class Memory : MonoBehaviour
 
     public void RemoveMemory(CharacterBase character)
     {
-        if (memories.TryGetValue(character, out var memData))
-        { 
-            memoriesList.Remove(memData);
+        if (memories.TryGetValue(character, out MemoryData mem))
+        {
+            memoriesList.Remove(mem);
             memories.Remove(character);
             RecalculateStatusFlags(); 
         }
@@ -69,6 +70,12 @@ public class Memory : MonoBehaviour
         sleepingAlly = memories.Values.Any(mem => mem.memoryType == MemoryEnum.SleepingChar);
         deadAlly = memories.Values.Any(mem => mem.memoryType == MemoryEnum.DeadChar);
         heardSound = memories.Values.Any(mem => mem.memoryType == MemoryEnum.Sound);
+        awareOfPlayer = memories.Values.Any(mem => mem.memoryType == MemoryEnum.LastSeenPlayer);
+        
+        knownCharacters = new List<CharacterBase>(memories.Keys);
+        memoriesList = new List<MemoryData>(memories.Values);
+        
+        AnnounceMemory?.Invoke(memoriesList);
     }
 
     public bool GetMostRecentMemoryOfType(MemoryEnum type, out MemoryData mem)

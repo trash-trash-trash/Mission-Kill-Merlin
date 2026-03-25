@@ -25,6 +25,8 @@ public class Sight : MonoBehaviour, ISee
     public LayerMask layersToIgnore;
 
     public Transform eyes;
+
+    public CharacterBase playerCharacter;
     
     void OnTriggerStay(Collider other)
     {
@@ -152,8 +154,12 @@ public class Sight : MonoBehaviour, ISee
         if (input)
         {
             Player newPlayer = player.GetComponent<Player>();
-
+            playerCharacter = newPlayer;
             AnnounceCanSeePlayer?.Invoke(newPlayer, true);
+        }
+        else
+        {
+            playerCharacter = null;
         }
     }
 

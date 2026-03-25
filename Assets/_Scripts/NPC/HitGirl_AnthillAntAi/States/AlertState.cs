@@ -15,27 +15,36 @@ public class AlertState : NPCAnthillStateBase
         base.Enter();
         scenarioBrain.debugText.SetText("!");
         myAgent = scenarioBrain.navMeshAgent;
-        startingPoint = myAgent.transform.position;
-        speed = myAgent.speed;
-        myAgent.speed = speed * 2;
         
-        fleePoint = scenarioBrain.patrolPaths.fleePatrolPoints[
-            Random.Range(0, scenarioBrain.patrolPaths.fleePatrolPoints.Count)
-        ];
-        scenarioBrain.npcHeadLook.FlipLookingAt(Vector3.back, false);
-        
-        myAgent.SetDestination(fleePoint.transform.position);
+        //need to break this up further
+        //if not aggro, flee
+        if(!scenarioBrain.aggro)
+        {
+            startingPoint = myAgent.transform.position;
+            speed = myAgent.speed;
+            myAgent.speed = speed * 2;
+
+            fleePoint = scenarioBrain.patrolPaths.fleePatrolPoints[
+                Random.Range(0, scenarioBrain.patrolPaths.fleePatrolPoints.Count)
+            ];
+            scenarioBrain.npcHeadLook.FlipLookingAt(Vector3.back, false);
+
+            myAgent.SetDestination(fleePoint.transform.position);
+        }
     }
     
     private void FixedUpdate()
     {
-        if (!scenarioBrain.navMeshAgent.enabled)
-            return;
-        
-        //default arrival threshold 0.5
-        if (!myAgent.pathPending && myAgent.remainingDistance <= 0.5f)
+        if (!scenarioBrain.aggro)
         {
-            scenarioBrain.npcHeadLook.FlipLookingAt(startingPoint, true);
+            if (!scenarioBrain.navMeshAgent.enabled)
+                return;
+
+            //default arrival threshold 0.5
+            if (!myAgent.pathPending && myAgent.remainingDistance <= 0.5f)
+            {
+                scenarioBrain.npcHeadLook.FlipLookingAt(startingPoint, true);
+            }
         }
     }
 }
