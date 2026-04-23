@@ -10,18 +10,29 @@ public class PlayerInputHandler : MonoBehaviour
 
     public event Action<Vector2> AnnounceLookVector2;
     public event Action<Vector2> AnnounceMoveVector2;
-    
-    public event Action<InputAction.CallbackContext> AnnounceAggressiveAction;
-    public event Action<InputAction.CallbackContext> AnnounceUseAction;
+
+    public event Action<InputAction.CallbackContext> AnnounceControl;
+
+    public event Action<InputAction.CallbackContext> AnnounceRightClick;
+    public event Action<InputAction.CallbackContext> AnnounceLeftClick;
     public event Action<InputAction.CallbackContext> AnnounceInventory01;
     public event Action<InputAction.CallbackContext> AnnounceInventory02;
     public event Action<InputAction.CallbackContext> AnnounceNextInventory;
     public event Action<InputAction.CallbackContext> AnnounceToggleRun;
-    
-    
+
+    public event Action<InputAction.CallbackContext> AnnounceQ;
+
+    public event Action<InputAction.CallbackContext> AnnounceR;
+
+    public event Action<InputAction.CallbackContext> AnnounceShift;
+
+
     private void Awake()
     {
         controls = new HGPlayerControls();
+
+        controls.InGameActionMap.Control.performed += OnControl;
+        controls.InGameActionMap.Control.canceled += OnControl;
 
         controls.InGameActionMap.MoveAction.performed += OnMove;
         controls.InGameActionMap.MoveAction.canceled += OnMove;
@@ -29,29 +40,60 @@ public class PlayerInputHandler : MonoBehaviour
         controls.InGameActionMap.LookAction.performed += OnLook;
         controls.InGameActionMap.LookAction.canceled += OnLook;
 
-        controls.InGameActionMap.UseAction.performed += OnUse;
-        controls.InGameActionMap.UseAction.canceled += OnUse;
-        
-        controls.InGameActionMap.AggressiveAction.performed += OnAggressiveAction;
-        controls.InGameActionMap.AggressiveAction.canceled += OnAggressiveAction;
+        controls.InGameActionMap.LeftClick.performed += OnLeftClick;
+        controls.InGameActionMap.LeftClick.canceled += OnLeftClick;
+
+        controls.InGameActionMap.RightClick.performed += OnRightClick;
+        controls.InGameActionMap.RightClick.canceled += OnRightClick;
 
         controls.InGameActionMap.SelectInventory01.performed += OnInventory01;
         controls.InGameActionMap.SelectInventory01.canceled += OnInventory01;
-        
+
         controls.InGameActionMap.SelectInventory02.performed += OnInventory02;
         controls.InGameActionMap.SelectInventory02.canceled += OnInventory02;
-        
+
         controls.InGameActionMap.NextInventory.performed += NextInventory;
         controls.InGameActionMap.NextInventory.canceled += NextInventory;
-        
+
+        controls.InGameActionMap.Shift.performed += OnShift;
+        controls.InGameActionMap.Shift.canceled += OnShift;
+
         controls.InGameActionMap.ToggleRun.performed += OnToggleRun;
         controls.InGameActionMap.ToggleRun.canceled += OnToggleRun;
+
+        controls.InGameActionMap.Q.performed += OnQ;
+        controls.InGameActionMap.Q.canceled += OnQ;
+
+        controls.InGameActionMap.R.performed += OnR;
+        controls.InGameActionMap.R.canceled += OnR;
     }
-    
+
+
+    private void OnQ(InputAction.CallbackContext context)
+    {
+        AnnounceQ?.Invoke(context);
+    }
+
+    private void OnR(InputAction.CallbackContext context)
+    {
+        AnnounceR?.Invoke(context);
+    }
+
+    private void OnControl(InputAction.CallbackContext context)
+    {
+        AnnounceControl?.Invoke(context);
+    }
+
+    private void OnShift(InputAction.CallbackContext context)
+    {
+        AnnounceShift?.Invoke(context);
+    }
+
     private void OnInventory01(InputAction.CallbackContext context)
     {
         AnnounceInventory01?.Invoke(context);
     }
+
     private void OnInventory02(InputAction.CallbackContext context)
     {
         AnnounceInventory02?.Invoke(context);
@@ -77,7 +119,7 @@ public class PlayerInputHandler : MonoBehaviour
     private void Update()
     {
         HandleLook();
-        HandleMove(); 
+        HandleMove();
     }
 
     private void HandleLook()
@@ -97,7 +139,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void OnMove(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (context.performed)
             moveInput = context.ReadValue<Vector2>();
         else
             moveInput = Vector2.zero;
@@ -105,37 +147,43 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void OnLook(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (context.performed)
             lookInput = context.ReadValue<Vector2>();
-        else 
+        else
             lookInput = Vector2.zero;
     }
 
-    private void OnUse(InputAction.CallbackContext context)
+    private void OnLeftClick(InputAction.CallbackContext context)
     {
-        AnnounceUseAction?.Invoke(context);
+        AnnounceLeftClick?.Invoke(context);
     }
 
-    private void OnAggressiveAction(InputAction.CallbackContext context)
+    private void OnRightClick(InputAction.CallbackContext context)
     {
-        AnnounceAggressiveAction?.Invoke(context);
+        AnnounceRightClick?.Invoke(context);
     }
 
     void OnDisable()
     {
         controls.Disable();
-        
+
+        controls.InGameActionMap.Control.performed -= OnControl;
+        controls.InGameActionMap.Control.canceled -= OnControl;
         controls.InGameActionMap.MoveAction.performed -= OnMove;
         controls.InGameActionMap.MoveAction.canceled -= OnMove;
         controls.InGameActionMap.LookAction.performed -= OnLook;
         controls.InGameActionMap.LookAction.canceled -= OnLook;
-        controls.InGameActionMap.UseAction.performed -= OnUse;
-        controls.InGameActionMap.UseAction.canceled -= OnUse;
-        controls.InGameActionMap.AggressiveAction.performed -= OnAggressiveAction;
-        controls.InGameActionMap.AggressiveAction.canceled -= OnAggressiveAction;
+        controls.InGameActionMap.LeftClick.performed -= OnLeftClick;
+        controls.InGameActionMap.LeftClick.canceled -= OnLeftClick;
+        controls.InGameActionMap.RightClick.performed -= OnRightClick;
+        controls.InGameActionMap.RightClick.canceled -= OnRightClick;
         controls.InGameActionMap.SelectInventory01.performed -= OnInventory01;
         controls.InGameActionMap.SelectInventory01.canceled -= OnInventory01;
         controls.InGameActionMap.SelectInventory02.performed -= OnInventory02;
         controls.InGameActionMap.SelectInventory02.canceled -= OnInventory02;
+        controls.InGameActionMap.Q.performed -= OnQ;
+        controls.InGameActionMap.Q.canceled -= OnQ;
+        controls.InGameActionMap.R.performed -= OnR;
+        controls.InGameActionMap.R.canceled -= OnR;
     }
 }

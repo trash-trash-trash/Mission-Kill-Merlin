@@ -13,8 +13,8 @@ public class Clothes : MonoBehaviour
     public Dictionary<Character, Color> clothesColorDict = new Dictionary<Character, Color>();
 
     //fix later with models
-    public MeshRenderer head;
-    public MeshRenderer body;
+    public List<MeshRenderer> skinRenderers = new List<MeshRenderer>();
+    public List<MeshRenderer> clothesRenderers = new List<MeshRenderer>();
     
     private bool clothed = true;
 
@@ -37,8 +37,11 @@ public class Clothes : MonoBehaviour
 
         int rand = Random.Range(0, skinTones.skinTones.Count);
         skinColor = skinTones.skinTones[rand];
-        if(head!=null)
-            head.material.color = skinColor;
+
+        foreach (MeshRenderer meshRenderer in skinRenderers)
+        {
+            meshRenderer.material.color = skinColor;
+        }
 
         ChangeClothes(clothesCharacter);
     }
@@ -46,12 +49,20 @@ public class Clothes : MonoBehaviour
     public void ChangeClothes(Character characterClothes)
     {
         clothesCharacter = characterClothes;
-        body.material.color = clothesColorDict[characterClothes];
+        
+        foreach (MeshRenderer meshRenderer in clothesRenderers)
+        {
+            meshRenderer.material.color = clothesColorDict[characterClothes];;
+        }
     }
 
     public void Undress()
     {
         Clothed = false;
-        body.material.color = skinColor;
+        
+        foreach (MeshRenderer meshRenderer in clothesRenderers)
+        {
+            meshRenderer.material.color = skinColor;
+        }
     }
 }

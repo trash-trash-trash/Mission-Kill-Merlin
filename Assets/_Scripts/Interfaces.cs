@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 public interface IInteractable
 {
-    public void Interact(IInteract interactee, CharacterActions actionType);
+    public bool Interact(IInteract interactee, CharacterActions actionType);
 
     public GameObject ReturnSelf();
 
@@ -11,6 +12,7 @@ public interface IInteractable
 
 public interface IInteract
 {
+    public void CanInteract(bool canInteract);
 }
 
 public interface IHear
@@ -43,15 +45,23 @@ public interface ICharacter
     public CharacterBase ReturnCharacterBase();
 }
 
-public interface IWeapon
+public interface IInventoryObject
 {
-    public void Equip(WeaponSO weaponSO);
+    public bool ReturnCanEquip();
+    
+    public void Equip(Inventory inventory);
+
+    public void Idle();
+
+    public void Drop();
 
     public void Aim();
-
-    public void Holster();
     
-    public void AggroAction();
+    public void Throw();
+    
+    public void Use();
 
-    public IWeapon ReturnSelf();
+    public GameObject ReturnSelf();
+
+    public ItemSO ReturnItemSO();
 }

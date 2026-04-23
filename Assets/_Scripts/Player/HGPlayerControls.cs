@@ -102,7 +102,7 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""UseAction"",
+                    ""name"": ""LeftClick"",
                     ""type"": ""Button"",
                     ""id"": ""ad30cb5b-4a6f-46d1-8014-0de87d85f777"",
                     ""expectedControlType"": """",
@@ -111,7 +111,7 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""AggressiveAction"",
+                    ""name"": ""RightClick"",
                     ""type"": ""Button"",
                     ""id"": ""b31d2ea8-998a-4622-9a69-425d3868b558"",
                     ""expectedControlType"": """",
@@ -147,6 +147,24 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""SelectInventory03"",
+                    ""type"": ""Button"",
+                    ""id"": ""6c201317-f978-4bb1-8893-2d1b143b95fa"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectInventory04"",
+                    ""type"": ""Button"",
+                    ""id"": ""05ede709-5621-42fa-a8b8-d81f4175c144"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""NextInventory"",
                     ""type"": ""Button"",
                     ""id"": ""f3c8f6e1-4701-41e6-9372-cb11f42860d8"",
@@ -159,6 +177,42 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""ToggleRun"",
                     ""type"": ""Button"",
                     ""id"": ""f226bc3d-465d-418d-a2c7-a4d976c7b665"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shift"",
+                    ""type"": ""Button"",
+                    ""id"": ""4e76b1bc-91db-4f34-8547-e7231cc0f5bc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Control"",
+                    ""type"": ""Button"",
+                    ""id"": ""26287ea7-4493-4a80-8d48-1cf637fb87ca"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Q"",
+                    ""type"": ""Button"",
+                    ""id"": ""04735869-7670-40af-92f2-f23cd0cf632d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""R"",
+                    ""type"": ""Button"",
+                    ""id"": ""0def23cc-863b-4764-9b57-1d4029c1a268"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -272,7 +326,7 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";KBM"",
-                    ""action"": ""UseAction"",
+                    ""action"": ""LeftClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -283,7 +337,7 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";KBM"",
-                    ""action"": ""AggressiveAction"",
+                    ""action"": ""RightClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -322,6 +376,28 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""15041bd3-b103-497c-8e96-03f70201b596"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectInventory03"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""60536087-ad9f-473b-9486-0c8b770f7f83"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectInventory04"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""2bb71b5f-ada6-4236-b9e7-bfbfa982e0cb"",
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
@@ -339,6 +415,50 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ToggleRun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ec4e04db-69b7-4837-aaaf-066d2bd7ed69"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6fc2a0a5-e826-49df-9cbd-7ec780f30f30"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Control"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c2e7a2a2-5ac5-4eeb-bc6e-87b62a517f02"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Q"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d9dbe2b7-d788-45df-ae7c-0d45050fe56d"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""R"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -367,13 +487,19 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
         // InGameActionMap
         m_InGameActionMap = asset.FindActionMap("InGameActionMap", throwIfNotFound: true);
         m_InGameActionMap_MoveAction = m_InGameActionMap.FindAction("MoveAction", throwIfNotFound: true);
-        m_InGameActionMap_UseAction = m_InGameActionMap.FindAction("UseAction", throwIfNotFound: true);
-        m_InGameActionMap_AggressiveAction = m_InGameActionMap.FindAction("AggressiveAction", throwIfNotFound: true);
+        m_InGameActionMap_LeftClick = m_InGameActionMap.FindAction("LeftClick", throwIfNotFound: true);
+        m_InGameActionMap_RightClick = m_InGameActionMap.FindAction("RightClick", throwIfNotFound: true);
         m_InGameActionMap_LookAction = m_InGameActionMap.FindAction("LookAction", throwIfNotFound: true);
         m_InGameActionMap_SelectInventory01 = m_InGameActionMap.FindAction("SelectInventory01", throwIfNotFound: true);
         m_InGameActionMap_SelectInventory02 = m_InGameActionMap.FindAction("SelectInventory02", throwIfNotFound: true);
+        m_InGameActionMap_SelectInventory03 = m_InGameActionMap.FindAction("SelectInventory03", throwIfNotFound: true);
+        m_InGameActionMap_SelectInventory04 = m_InGameActionMap.FindAction("SelectInventory04", throwIfNotFound: true);
         m_InGameActionMap_NextInventory = m_InGameActionMap.FindAction("NextInventory", throwIfNotFound: true);
         m_InGameActionMap_ToggleRun = m_InGameActionMap.FindAction("ToggleRun", throwIfNotFound: true);
+        m_InGameActionMap_Shift = m_InGameActionMap.FindAction("Shift", throwIfNotFound: true);
+        m_InGameActionMap_Control = m_InGameActionMap.FindAction("Control", throwIfNotFound: true);
+        m_InGameActionMap_Q = m_InGameActionMap.FindAction("Q", throwIfNotFound: true);
+        m_InGameActionMap_R = m_InGameActionMap.FindAction("R", throwIfNotFound: true);
     }
 
     ~@HGPlayerControls()
@@ -455,13 +581,19 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_InGameActionMap;
     private List<IInGameActionMapActions> m_InGameActionMapActionsCallbackInterfaces = new List<IInGameActionMapActions>();
     private readonly InputAction m_InGameActionMap_MoveAction;
-    private readonly InputAction m_InGameActionMap_UseAction;
-    private readonly InputAction m_InGameActionMap_AggressiveAction;
+    private readonly InputAction m_InGameActionMap_LeftClick;
+    private readonly InputAction m_InGameActionMap_RightClick;
     private readonly InputAction m_InGameActionMap_LookAction;
     private readonly InputAction m_InGameActionMap_SelectInventory01;
     private readonly InputAction m_InGameActionMap_SelectInventory02;
+    private readonly InputAction m_InGameActionMap_SelectInventory03;
+    private readonly InputAction m_InGameActionMap_SelectInventory04;
     private readonly InputAction m_InGameActionMap_NextInventory;
     private readonly InputAction m_InGameActionMap_ToggleRun;
+    private readonly InputAction m_InGameActionMap_Shift;
+    private readonly InputAction m_InGameActionMap_Control;
+    private readonly InputAction m_InGameActionMap_Q;
+    private readonly InputAction m_InGameActionMap_R;
     /// <summary>
     /// Provides access to input actions defined in input action map "InGameActionMap".
     /// </summary>
@@ -478,13 +610,13 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @MoveAction => m_Wrapper.m_InGameActionMap_MoveAction;
         /// <summary>
-        /// Provides access to the underlying input action "InGameActionMap/UseAction".
+        /// Provides access to the underlying input action "InGameActionMap/LeftClick".
         /// </summary>
-        public InputAction @UseAction => m_Wrapper.m_InGameActionMap_UseAction;
+        public InputAction @LeftClick => m_Wrapper.m_InGameActionMap_LeftClick;
         /// <summary>
-        /// Provides access to the underlying input action "InGameActionMap/AggressiveAction".
+        /// Provides access to the underlying input action "InGameActionMap/RightClick".
         /// </summary>
-        public InputAction @AggressiveAction => m_Wrapper.m_InGameActionMap_AggressiveAction;
+        public InputAction @RightClick => m_Wrapper.m_InGameActionMap_RightClick;
         /// <summary>
         /// Provides access to the underlying input action "InGameActionMap/LookAction".
         /// </summary>
@@ -498,6 +630,14 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @SelectInventory02 => m_Wrapper.m_InGameActionMap_SelectInventory02;
         /// <summary>
+        /// Provides access to the underlying input action "InGameActionMap/SelectInventory03".
+        /// </summary>
+        public InputAction @SelectInventory03 => m_Wrapper.m_InGameActionMap_SelectInventory03;
+        /// <summary>
+        /// Provides access to the underlying input action "InGameActionMap/SelectInventory04".
+        /// </summary>
+        public InputAction @SelectInventory04 => m_Wrapper.m_InGameActionMap_SelectInventory04;
+        /// <summary>
         /// Provides access to the underlying input action "InGameActionMap/NextInventory".
         /// </summary>
         public InputAction @NextInventory => m_Wrapper.m_InGameActionMap_NextInventory;
@@ -505,6 +645,22 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "InGameActionMap/ToggleRun".
         /// </summary>
         public InputAction @ToggleRun => m_Wrapper.m_InGameActionMap_ToggleRun;
+        /// <summary>
+        /// Provides access to the underlying input action "InGameActionMap/Shift".
+        /// </summary>
+        public InputAction @Shift => m_Wrapper.m_InGameActionMap_Shift;
+        /// <summary>
+        /// Provides access to the underlying input action "InGameActionMap/Control".
+        /// </summary>
+        public InputAction @Control => m_Wrapper.m_InGameActionMap_Control;
+        /// <summary>
+        /// Provides access to the underlying input action "InGameActionMap/Q".
+        /// </summary>
+        public InputAction @Q => m_Wrapper.m_InGameActionMap_Q;
+        /// <summary>
+        /// Provides access to the underlying input action "InGameActionMap/R".
+        /// </summary>
+        public InputAction @R => m_Wrapper.m_InGameActionMap_R;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -534,12 +690,12 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
             @MoveAction.started += instance.OnMoveAction;
             @MoveAction.performed += instance.OnMoveAction;
             @MoveAction.canceled += instance.OnMoveAction;
-            @UseAction.started += instance.OnUseAction;
-            @UseAction.performed += instance.OnUseAction;
-            @UseAction.canceled += instance.OnUseAction;
-            @AggressiveAction.started += instance.OnAggressiveAction;
-            @AggressiveAction.performed += instance.OnAggressiveAction;
-            @AggressiveAction.canceled += instance.OnAggressiveAction;
+            @LeftClick.started += instance.OnLeftClick;
+            @LeftClick.performed += instance.OnLeftClick;
+            @LeftClick.canceled += instance.OnLeftClick;
+            @RightClick.started += instance.OnRightClick;
+            @RightClick.performed += instance.OnRightClick;
+            @RightClick.canceled += instance.OnRightClick;
             @LookAction.started += instance.OnLookAction;
             @LookAction.performed += instance.OnLookAction;
             @LookAction.canceled += instance.OnLookAction;
@@ -549,12 +705,30 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
             @SelectInventory02.started += instance.OnSelectInventory02;
             @SelectInventory02.performed += instance.OnSelectInventory02;
             @SelectInventory02.canceled += instance.OnSelectInventory02;
+            @SelectInventory03.started += instance.OnSelectInventory03;
+            @SelectInventory03.performed += instance.OnSelectInventory03;
+            @SelectInventory03.canceled += instance.OnSelectInventory03;
+            @SelectInventory04.started += instance.OnSelectInventory04;
+            @SelectInventory04.performed += instance.OnSelectInventory04;
+            @SelectInventory04.canceled += instance.OnSelectInventory04;
             @NextInventory.started += instance.OnNextInventory;
             @NextInventory.performed += instance.OnNextInventory;
             @NextInventory.canceled += instance.OnNextInventory;
             @ToggleRun.started += instance.OnToggleRun;
             @ToggleRun.performed += instance.OnToggleRun;
             @ToggleRun.canceled += instance.OnToggleRun;
+            @Shift.started += instance.OnShift;
+            @Shift.performed += instance.OnShift;
+            @Shift.canceled += instance.OnShift;
+            @Control.started += instance.OnControl;
+            @Control.performed += instance.OnControl;
+            @Control.canceled += instance.OnControl;
+            @Q.started += instance.OnQ;
+            @Q.performed += instance.OnQ;
+            @Q.canceled += instance.OnQ;
+            @R.started += instance.OnR;
+            @R.performed += instance.OnR;
+            @R.canceled += instance.OnR;
         }
 
         /// <summary>
@@ -569,12 +743,12 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
             @MoveAction.started -= instance.OnMoveAction;
             @MoveAction.performed -= instance.OnMoveAction;
             @MoveAction.canceled -= instance.OnMoveAction;
-            @UseAction.started -= instance.OnUseAction;
-            @UseAction.performed -= instance.OnUseAction;
-            @UseAction.canceled -= instance.OnUseAction;
-            @AggressiveAction.started -= instance.OnAggressiveAction;
-            @AggressiveAction.performed -= instance.OnAggressiveAction;
-            @AggressiveAction.canceled -= instance.OnAggressiveAction;
+            @LeftClick.started -= instance.OnLeftClick;
+            @LeftClick.performed -= instance.OnLeftClick;
+            @LeftClick.canceled -= instance.OnLeftClick;
+            @RightClick.started -= instance.OnRightClick;
+            @RightClick.performed -= instance.OnRightClick;
+            @RightClick.canceled -= instance.OnRightClick;
             @LookAction.started -= instance.OnLookAction;
             @LookAction.performed -= instance.OnLookAction;
             @LookAction.canceled -= instance.OnLookAction;
@@ -584,12 +758,30 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
             @SelectInventory02.started -= instance.OnSelectInventory02;
             @SelectInventory02.performed -= instance.OnSelectInventory02;
             @SelectInventory02.canceled -= instance.OnSelectInventory02;
+            @SelectInventory03.started -= instance.OnSelectInventory03;
+            @SelectInventory03.performed -= instance.OnSelectInventory03;
+            @SelectInventory03.canceled -= instance.OnSelectInventory03;
+            @SelectInventory04.started -= instance.OnSelectInventory04;
+            @SelectInventory04.performed -= instance.OnSelectInventory04;
+            @SelectInventory04.canceled -= instance.OnSelectInventory04;
             @NextInventory.started -= instance.OnNextInventory;
             @NextInventory.performed -= instance.OnNextInventory;
             @NextInventory.canceled -= instance.OnNextInventory;
             @ToggleRun.started -= instance.OnToggleRun;
             @ToggleRun.performed -= instance.OnToggleRun;
             @ToggleRun.canceled -= instance.OnToggleRun;
+            @Shift.started -= instance.OnShift;
+            @Shift.performed -= instance.OnShift;
+            @Shift.canceled -= instance.OnShift;
+            @Control.started -= instance.OnControl;
+            @Control.performed -= instance.OnControl;
+            @Control.canceled -= instance.OnControl;
+            @Q.started -= instance.OnQ;
+            @Q.performed -= instance.OnQ;
+            @Q.canceled -= instance.OnQ;
+            @R.started -= instance.OnR;
+            @R.performed -= instance.OnR;
+            @R.canceled -= instance.OnR;
         }
 
         /// <summary>
@@ -651,19 +843,19 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMoveAction(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "UseAction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "LeftClick" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnUseAction(InputAction.CallbackContext context);
+        void OnLeftClick(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "AggressiveAction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "RightClick" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnAggressiveAction(InputAction.CallbackContext context);
+        void OnRightClick(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "LookAction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -686,6 +878,20 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSelectInventory02(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "SelectInventory03" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSelectInventory03(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SelectInventory04" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSelectInventory04(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "NextInventory" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -699,5 +905,33 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnToggleRun(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Shift" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnShift(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Control" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnControl(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Q" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnQ(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "R" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnR(InputAction.CallbackContext context);
     }
 }

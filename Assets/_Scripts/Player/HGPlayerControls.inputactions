@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "HGPlayerControls",
     "maps": [
         {
@@ -15,7 +16,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "UseAction",
+                    "name": "LeftClick",
                     "type": "Button",
                     "id": "ad30cb5b-4a6f-46d1-8014-0de87d85f777",
                     "expectedControlType": "",
@@ -24,7 +25,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "AggressiveAction",
+                    "name": "RightClick",
                     "type": "Button",
                     "id": "b31d2ea8-998a-4622-9a69-425d3868b558",
                     "expectedControlType": "",
@@ -60,6 +61,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SelectInventory03",
+                    "type": "Button",
+                    "id": "6c201317-f978-4bb1-8893-2d1b143b95fa",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectInventory04",
+                    "type": "Button",
+                    "id": "05ede709-5621-42fa-a8b8-d81f4175c144",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "NextInventory",
                     "type": "Button",
                     "id": "f3c8f6e1-4701-41e6-9372-cb11f42860d8",
@@ -72,6 +91,42 @@
                     "name": "ToggleRun",
                     "type": "Button",
                     "id": "f226bc3d-465d-418d-a2c7-a4d976c7b665",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Shift",
+                    "type": "Button",
+                    "id": "4e76b1bc-91db-4f34-8547-e7231cc0f5bc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Control",
+                    "type": "Button",
+                    "id": "26287ea7-4493-4a80-8d48-1cf637fb87ca",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Q",
+                    "type": "Button",
+                    "id": "04735869-7670-40af-92f2-f23cd0cf632d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "R",
+                    "type": "Button",
+                    "id": "0def23cc-863b-4764-9b57-1d4029c1a268",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -185,7 +240,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";KBM",
-                    "action": "UseAction",
+                    "action": "LeftClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -196,7 +251,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";KBM",
-                    "action": "AggressiveAction",
+                    "action": "RightClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -235,6 +290,28 @@
                 },
                 {
                     "name": "",
+                    "id": "15041bd3-b103-497c-8e96-03f70201b596",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectInventory03",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "60536087-ad9f-473b-9486-0c8b770f7f83",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectInventory04",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "2bb71b5f-ada6-4236-b9e7-bfbfa982e0cb",
                     "path": "<Keyboard>/tab",
                     "interactions": "",
@@ -252,6 +329,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleRun",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ec4e04db-69b7-4837-aaaf-066d2bd7ed69",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shift",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6fc2a0a5-e826-49df-9cbd-7ec780f30f30",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Control",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c2e7a2a2-5ac5-4eeb-bc6e-87b62a517f02",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Q",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d9dbe2b7-d788-45df-ae7c-0d45050fe56d",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "R",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

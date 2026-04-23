@@ -10,6 +10,15 @@ public class MouseLook : MonoBehaviour
 
     public bool canLook = true;
 
+    //hack
+    public Transform cameraTransform;
+    public Transform bodyTransform;
+
+    void Update()
+    {
+        cameraTransform.position = bodyTransform.position;
+    }
+
     public void Awake()
     {
         playerInputs.AnnounceLookVector2 += HandleLook;

@@ -10,8 +10,7 @@ public class CharacterBase : MonoBehaviour, ICharacter
     public Health hp;
     public event Action AnnounceShoved;
     public event Action AnnounceSlept;
-
-
+    
     public void Awake()
     {
         if (hp != null)
@@ -21,7 +20,7 @@ public class CharacterBase : MonoBehaviour, ICharacter
         }
     }
 
-    private void ReactToWeapon(WeaponSO obj)
+    private void ReactToWeapon(ItemSO obj)
     {
         if (obj.weaponDamage == 0)
         {

@@ -34,13 +34,17 @@ public class NPCHeadLook : MonoBehaviour
 
     private void RotateHead(Vector3 direction)
     {
-        if(!lookingAtPointOfInterest)
-            direction.y = transform.rotation.y;
+        // Remove vertical component so no X-axis rotation happens
+        direction.y = 0f;
 
         if (direction.sqrMagnitude > 0.01f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction.normalized);
-            head.rotation = Quaternion.RotateTowards(head.rotation, targetRotation, headTurnSpeed * Time.deltaTime);
+            head.rotation = Quaternion.RotateTowards(
+                head.rotation,
+                targetRotation,
+                headTurnSpeed * Time.deltaTime
+            );
         }
     }
 

@@ -132,6 +132,7 @@ public class EnergyBall : MonoBehaviour
             if (rb)
             {
                 Vector3 dir = (h.transform.position - transform.position).normalized;
+                //add explosion force
                 rb.AddForce(dir * explodeForce, ForceMode.VelocityChange);
             }
 

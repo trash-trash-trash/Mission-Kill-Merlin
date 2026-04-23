@@ -49,18 +49,24 @@ public class NPCAnthillBase : MonoBehaviour, ISense, IInteractable, IHear
 
     void Start()
     {
-        characterBase.AnnounceShoved += Shoved;
         characterBase.AnnounceSlept += Slept;
+        characterBase.AnnounceShoved += Shoved;
+        hp.AnnounceHP += CheckAlive;
+        hp.AnnounceHealthStatus += SetStatus;
+        inventory.AnnounceInventory += CheckArmed;
         memory.AnnounceMemory += CheckMemory;
         sight.AnnounceCanSeeCharacter += CheckCharacter;
         sight.AnnounceCanSeePlayer += SeenPlayer;
-        hp.AnnounceHP += CheckAlive;
-        hp.AnnounceHealthStatus += SetStatus;
-
-        if (inventory.equippedWeapon != null)
-            hasWeapon = true;
         
         hp.ChangeHP(hp.maxHP);
+    }
+
+    private void CheckArmed(List<ItemBase> aObj)
+    {
+        if (aObj.Count == 0)
+            hasWeapon = false;
+        else
+            hasWeapon = true;
     }
 
     private void CheckAlive(int aObj)
@@ -75,7 +81,7 @@ public class NPCAnthillBase : MonoBehaviour, ISense, IInteractable, IHear
     {
         if (memory.awareOfPlayer)
         {
-            if (playerTransform.GetComponentInChildren<Health>().Alive)
+            if (playerTransform.GetComponentInParent<Health>().Alive)
             { 
                 susSeenPlayer = true;
                 alert = true;
@@ -93,8 +99,9 @@ public class NPCAnthillBase : MonoBehaviour, ISense, IInteractable, IHear
         }
     }
 
-    private void SetStatus(HealthStatus newStatus)
+    private void SetStatus(List<HealthStatus> aHealthStatusList)
     {
+        HealthStatus newStatus = aHealthStatusList[0];
         if (newStatus == HealthStatus.Asleep || newStatus == HealthStatus.Dead)
         {
             navMeshAgent.enabled = false;
@@ -200,7 +207,8 @@ public class NPCAnthillBase : MonoBehaviour, ISense, IInteractable, IHear
         if (canSeePlayer)
         {
             //  if (player.AggroAction)
-            //alert = true;
+            playerTransform = player.transform;
+            alert = true;
         }
     }
 
@@ -248,8 +256,10 @@ public class NPCAnthillBase : MonoBehaviour, ISense, IInteractable, IHear
         aWorldState.Set(NPCBaseScenario.InRangeToAttack, inRangeToAttack);
     }
 
-    public void Interact(IInteract interactee, CharacterActions actionType)
+    public bool Interact(IInteract interactee, CharacterActions actionType)
     {
+        if (!canInteract)
+            return false;
         //fix
         if (actionType == CharacterActions.Undress)
         {
@@ -261,6 +271,8 @@ public class NPCAnthillBase : MonoBehaviour, ISense, IInteractable, IHear
             {
                 hp.RemoveStatus(HealthStatus.Asleep);
             }
+
+        return true;
     }
 
     public GameObject ReturnSelf()

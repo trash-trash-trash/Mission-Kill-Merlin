@@ -65,9 +65,12 @@ public class Door : MonoBehaviour, IInteractable
         isOpening = false;
     }
 
-    public void Interact(IInteract interactee, CharacterActions actionType)
+    public bool Interact(IInteract interactee, CharacterActions actionType)
     {
+        if(!canInteract)
+            return false;
         OpenCloseDoor();
+        return true;
     }
 
     public GameObject ReturnSelf()

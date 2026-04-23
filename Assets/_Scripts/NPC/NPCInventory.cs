@@ -1,18 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCInventory : MonoBehaviour
+public class NPCInventory : Inventory
 {
     //one weapon at a time for now
+  
+    public List<InventoryObjectBrain> inventoryObjectsToEquip = new List<InventoryObjectBrain>();
 
-    public WeaponSO equippedWeapon;
-    
-    public void EquipWeapon(WeaponSO weaponToEquip)
+    void OnEnable()
     {
-        equippedWeapon = weaponToEquip;
-    }
-
-    public void DropWeapon()
-    {
-        
+        foreach (InventoryObjectBrain inventoryObject in inventoryObjectsToEquip)
+        {
+         //   Equip(inventoryObject);
+        }
     }
 }

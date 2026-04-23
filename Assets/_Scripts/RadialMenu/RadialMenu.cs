@@ -17,12 +17,10 @@ public class RadialMenu : MonoBehaviour
 
     private void Start()
     {
-        use.AnnounceInteractableFound += AddButton;
-        use.AnnounceDoneChecking += Rearrange;
-        use.AnnounceCloseMenu += CloseMenu;
+        use.AnnounceItemFound += AddButton;
     }
 
-    public void AddButton(IInteractable interactable)
+    public void AddButton(IInventoryObject aWeapon)
     {
         GameObject butt = Instantiate(menuButtonPrefab, transform);
         RadialMenuButton rmb = butt.GetComponent<RadialMenuButton>();

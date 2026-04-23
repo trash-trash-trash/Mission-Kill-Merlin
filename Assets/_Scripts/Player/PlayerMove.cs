@@ -12,9 +12,8 @@ public class PlayerMove : MonoBehaviour
     public Transform cameraArmTransform;
 
     public bool canMove = true;
-    public bool moved = false;
 
-    public event Action<bool> AnnounceMoved;
+    public event Action<Vector3> AnnounceMoveVector;
 
     private void OnEnable()
     {
@@ -30,12 +29,6 @@ public class PlayerMove : MonoBehaviour
     {
         if (!canMove)
             return;
-
-        if (!moved)
-        {
-            moved = true;
-            AnnounceMoved?.Invoke(moved);
-        }
         //had to flip x/y and max x negative for some reason...
         Vector3 localMove = new Vector3(inputDirection.y, 0, -inputDirection.x);
         
@@ -44,6 +37,8 @@ public class PlayerMove : MonoBehaviour
             cameraArmTransform.TransformDirection(localMove).y * moveSpeed,cameraArmTransform.TransformDirection(localMove).z * moveSpeed);
         
         rb.linearVelocity = new Vector3(worldMove.x, rb.linearVelocity.y, worldMove.z);
+        
+        AnnounceMoveVector?.Invoke(worldMove);
     }
 
     private void OnMoveInput(Vector2 direction)

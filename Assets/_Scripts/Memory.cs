@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class Memory : MonoBehaviour
 {
-    public Dictionary<CharacterBase, MemoryData> memories = new();
+    public Dictionary<CharacterBase, MemoryData> memoriesOfCharacters = new();
+    public Dictionary<InventoryObjectBrain, MemoryData> memoriesOfItems = new();
 
     public List<CharacterBase> knownCharacters = new List<CharacterBase>();
     public List<MemoryData> memoriesList = new List<MemoryData>();
@@ -20,7 +21,7 @@ public class Memory : MonoBehaviour
     public void AddOrUpdateMemory(MemoryData mem)
     {
         // Check if we already have a memory of this character
-        if (memories.TryGetValue(mem.character, out MemoryData existing))
+        if (memoriesOfCharacters.TryGetValue(mem.character, out MemoryData existing))
         {
             // Update only if something has changed
             if (existing.memoryType != mem.memoryType || 
@@ -34,7 +35,7 @@ public class Memory : MonoBehaviour
         }
         else
         {
-            memories[mem.character] = mem;
+            memoriesOfCharacters[mem.character] = mem;
         }
         
         // if (mem.memoryType == MemoryEnum.Sound)
@@ -57,23 +58,23 @@ public class Memory : MonoBehaviour
 
     public void RemoveMemory(CharacterBase character)
     {
-        if (memories.TryGetValue(character, out MemoryData mem))
+        if (memoriesOfCharacters.TryGetValue(character, out MemoryData mem))
         {
             memoriesList.Remove(mem);
-            memories.Remove(character);
+            memoriesOfCharacters.Remove(character);
             RecalculateStatusFlags(); 
         }
     }
 
     private void RecalculateStatusFlags()
     {
-        sleepingAlly = memories.Values.Any(mem => mem.memoryType == MemoryEnum.SleepingChar);
-        deadAlly = memories.Values.Any(mem => mem.memoryType == MemoryEnum.DeadChar);
-        heardSound = memories.Values.Any(mem => mem.memoryType == MemoryEnum.Sound);
-        awareOfPlayer = memories.Values.Any(mem => mem.memoryType == MemoryEnum.LastSeenPlayer);
+        sleepingAlly = memoriesOfCharacters.Values.Any(mem => mem.memoryType == MemoryEnum.SleepingChar);
+        deadAlly = memoriesOfCharacters.Values.Any(mem => mem.memoryType == MemoryEnum.DeadChar);
+        heardSound = memoriesOfCharacters.Values.Any(mem => mem.memoryType == MemoryEnum.Sound);
+        awareOfPlayer = memoriesOfCharacters.Values.Any(mem => mem.memoryType == MemoryEnum.LastSeenPlayer);
         
-        knownCharacters = new List<CharacterBase>(memories.Keys);
-        memoriesList = new List<MemoryData>(memories.Values);
+        knownCharacters = new List<CharacterBase>(memoriesOfCharacters.Keys);
+        memoriesList = new List<MemoryData>(memoriesOfCharacters.Values);
         
         AnnounceMemory?.Invoke(memoriesList);
     }
@@ -83,7 +84,7 @@ public class Memory : MonoBehaviour
         mem = null;
         float latestTime = float.MinValue;
 
-        foreach (var memory in memories.Values)
+        foreach (var memory in memoriesOfCharacters.Values)
         {
             if (memory.memoryType == type && memory.timeMemoryAdded > latestTime)
             {

@@ -110,4 +110,9 @@ public class Patrol : MonoBehaviour, IInteract
         }
 
     }
+
+    public void CanInteract(bool canInteract)
+    {
+        
+    }
 }

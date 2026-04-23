@@ -11,23 +11,25 @@ public class Sight : MonoBehaviour, ISee
         get { return canSee; }
         set { canSee = value; }
     }
-    
+
     public bool canSeePlayer = false;
 
+
     public List<CharacterBase> charactersInVision = new List<CharacterBase>();
+    public List<InventoryObjectBrain> itemsInVision = new List<InventoryObjectBrain>();
     public List<GameObject> objectsInVision = new List<GameObject>();
-    
+
     public event Action<bool> AnnounceCanSee;
     public event Action<CharacterBase> AnnounceCanSeeCharacter;
     public event Action<Player, bool> AnnounceCanSeePlayer;
-    
+
     public LayerMask layersThatCanBlock;
     public LayerMask layersToIgnore;
 
     public Transform eyes;
 
     public CharacterBase playerCharacter;
-    
+
     void OnTriggerStay(Collider other)
     {
         if (!canSee) return;
@@ -57,9 +59,16 @@ public class Sight : MonoBehaviour, ISee
             if (!objectsInVision.Contains(otherGameObject))
                 objectsInVision.Add(otherGameObject);
 
-            CharacterBase icharacter = otherGameObject.GetComponent<CharacterBase>();
+            CharacterBase icharacter = otherGameObject.GetComponentInParent<CharacterBase>();
             if (icharacter != null)
                 AddRemoveCharacterFromVision(icharacter, true);
+
+            InventoryObjectBrain inventoryObjectBrain = otherGameObject.GetComponentInParent<InventoryObjectBrain>();
+            if (inventoryObjectBrain != null)
+            {
+                if (!itemsInVision.Contains(inventoryObjectBrain))
+                    itemsInVision.Add(inventoryObjectBrain);
+            }
         }
         else
         {
@@ -67,9 +76,16 @@ public class Sight : MonoBehaviour, ISee
             {
                 objectsInVision.Remove(otherGameObject);
 
-                CharacterBase icharacter = otherGameObject.GetComponent<CharacterBase>();
+                CharacterBase icharacter = otherGameObject.GetComponentInParent<CharacterBase>();
                 if (icharacter != null)
                     AddRemoveCharacterFromVision(icharacter, false);
+                
+                InventoryObjectBrain inventoryObjectBrain = otherGameObject.GetComponentInParent<InventoryObjectBrain>();
+                if (inventoryObjectBrain != null)
+                {
+                    if (!itemsInVision.Contains(inventoryObjectBrain))
+                        itemsInVision.Remove(inventoryObjectBrain);
+                }
             }
         }
     }
@@ -80,7 +96,7 @@ public class Sight : MonoBehaviour, ISee
         float distance = direction.magnitude;
         Ray ray = new Ray(startTransform.position, direction.normalized);
         Vector3 dirNormalized = direction.normalized;
-        
+
         if (Vector3.Dot(startTransform.forward, dirNormalized) < 0f)
             return false;
 
@@ -107,7 +123,7 @@ public class Sight : MonoBehaviour, ISee
                 AddRemoveCharacterFromVision(icharacter, false);
         }
     }
-    
+
     public void AddRemoveCharacterFromVision(CharacterBase character, bool isVisible)
     {
         bool alreadyInVision = charactersInVision.Contains(character);
@@ -137,7 +153,6 @@ public class Sight : MonoBehaviour, ISee
     }
 
 
-    
     public void ChangeCanSee(bool input)
     {
         canSee = input;
@@ -167,7 +182,7 @@ public class Sight : MonoBehaviour, ISee
     {
         return canSee;
     }
-    
+
     public bool ReturnCanSeePlayer()
     {
         return canSeePlayer;

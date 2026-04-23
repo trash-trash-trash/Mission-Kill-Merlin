@@ -5,8 +5,12 @@ public class ClothesItem : MonoBehaviour, IInteractable
     public Clothes clothes;
     private bool canInteract = true;
 
-    public void Interact(IInteract interactee, CharacterActions actionType)
+    public bool Interact(IInteract interactee, CharacterActions actionType)
     {
+        if (!canInteract)
+            return false;
+        
+        return true;
     }
 
     public GameObject ReturnSelf()

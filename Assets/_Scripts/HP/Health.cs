@@ -66,7 +66,9 @@ using UnityEngine;
 [Serializable]
 public enum HealthStatus
 {
+    Bleeding,
     Burning,
+    Healing,
     Wet,
     Asleep,
     Dead
@@ -74,21 +76,17 @@ public enum HealthStatus
 
 public class Health : MonoBehaviour
 {
-    
     //condense...
     public event Action<int> AnnounceHP;
     public event Action<int> AnnounceHPChangedBy;
-    public event Action<WeaponSO> AnnounceHitByWeapon;
-    public event Action<HealthStatus> AnnounceHealthStatus;
-    
-    [SerializeField]
-    private int currentHP;
-    
-    [SerializeField]
-    public int maxHP = 1;
+    public event Action<ItemSO> AnnounceHitByWeapon;
+    public event Action<List<HealthStatus>> AnnounceHealthStatus;
 
-    [SerializeField]
-    private bool alive = false;
+    [SerializeField] private int currentHP;
+
+    [SerializeField] public int maxHP = 1;
+
+    [SerializeField] private bool alive = false;
 
     public bool Alive
     {
@@ -96,8 +94,7 @@ public class Health : MonoBehaviour
         set => alive = value;
     }
 
-    [SerializeField]
-    private List<HealthStatus> statuses = new();
+    [SerializeField] private List<HealthStatus> statuses = new();
 
     public IReadOnlyList<HealthStatus> Statuses => statuses;
 
@@ -108,22 +105,23 @@ public class Health : MonoBehaviour
 
     public void AddStatus(HealthStatus s)
     {
-            statuses.Add(s);
-            AnnounceHealthStatus?.Invoke(s);
+        statuses.Add(s);
+        AnnounceHealthStatus?.Invoke(statuses);
     }
-    
+
     public int CountStatus(HealthStatus s)
     {
         int count = 0;
         foreach (var status in statuses)
-            if (status == s) count++;
+            if (status == s)
+                count++;
         return count;
     }
 
     public void RemoveStatus(HealthStatus s)
     {
         if (statuses.Remove(s))
-            AnnounceHealthStatus?.Invoke(s);
+            AnnounceHealthStatus?.Invoke(statuses);
     }
 
     public bool HasStatus(HealthStatus s) => statuses.Contains(s);
@@ -139,11 +137,11 @@ public class Health : MonoBehaviour
             CanChangeHP &= Alive;
             if (!Alive)
                 AddStatus(HealthStatus.Dead);
-            
+
             AnnounceHP?.Invoke(currentHP);
         }
     }
-    
+
     public virtual void ChangeHP(int value)
     {
         if (!CanChangeHP)
@@ -153,21 +151,22 @@ public class Health : MonoBehaviour
         AnnounceHPChangedBy?.Invoke(value);
     }
 
-    public virtual void HitByWeapon(WeaponSO weaponSo)
+    public virtual void HitByWeapon(ItemSO aItemSo)
     {
-        AnnounceHitByWeapon?.Invoke(weaponSo);
+        AnnounceHitByWeapon?.Invoke(aItemSo);
 
         //probably not
-        if (weaponSo.weaponDamage == 0)
+        if (aItemSo.weaponDamage == 0)
         {
-            if(Statuses.Contains(HealthStatus.Asleep))
+            if (Statuses.Contains(HealthStatus.Asleep))
                 RemoveStatus(HealthStatus.Asleep);
             else
                 AddStatus(HealthStatus.Asleep);
         }
-        
-        ChangeHP(weaponSo.weaponDamage);
+
+        ChangeHP(aItemSo.weaponDamage);
     }
+
 
     //TODO: Fix hardcoding values
     IEnumerator CheckBurning()
@@ -179,14 +178,28 @@ public class Health : MonoBehaviour
             if (!Alive)
                 continue;
 
+            int healCount = CountStatus(HealthStatus.Healing);
+            for (int i = 0; i < healCount; i++)
+            {
+                yield return new WaitForFixedUpdate();
+                ChangeHP(1);
+            }
+
             if (Statuses.Contains(HealthStatus.Wet))
             {
                 statuses.RemoveAll(s => s == HealthStatus.Burning);
                 continue;
             }
-            
+
             int burnCount = CountStatus(HealthStatus.Burning);
             for (int i = 0; i < burnCount; i++)
+            {
+                yield return new WaitForFixedUpdate();
+                ChangeHP(-1);
+            }
+
+            int bleedCount = CountStatus(HealthStatus.Bleeding);
+            for (int i = 0; i < bleedCount; i++)
             {
                 yield return new WaitForFixedUpdate();
                 ChangeHP(-1);
@@ -194,4 +207,3 @@ public class Health : MonoBehaviour
         }
     }
 }
-
