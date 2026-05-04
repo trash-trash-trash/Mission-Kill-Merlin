@@ -2,54 +2,86 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-[System.Serializable]
-public class HandUI
-{
-    public Image weaponImage;
-    public Image abilityImage;
 
-    public TMP_Text weaponText;
-    public TMP_Text abilityText;
-}
+[System.Serializable]
 public class PlayerInventoryView : MonoBehaviour
 {
+    public ItemBase leftEquippedItem;
+    public ItemBase rightEquippedItem;
     public ItemSO emptyFistSO;
 
-    public HandUI leftHandUI;
-    public HandUI rightHandUI;
+    public Image leftHandImage;
+    public Image rightHandImage;
+    public TMP_Text leftHandText;
+    public TMP_Text rightHandText;
 
     public Inventory leftHandInventory;
     public Inventory rightHandInventory;
 
     void Start()
     {
-        // leftHandInventory.AnnounceInventory += (items) => HandleInventory(items, leftHandUI);
-        // rightHandInventory.AnnounceInventory += (items) => HandleInventory(items, rightHandUI);
+        leftHandInventory.AnnounceInventory += HandleLeftInventory;
+        rightHandInventory.AnnounceInventory += HandleRightInventory;
     }
-    
-    private void HandleInventory(List<InventoryObjectBrain> items, HandUI ui)
-    {
-        ItemSO itemSO;
 
-        if (items == null || items.Count == 0)
+
+    private void HandleLeftInventory(Inventory inventory, List<ItemBase> aRg2)
+    {
+        if (inventory.equippedItem != null)
         {
-            itemSO = emptyFistSO;
+            Equip(leftHandInventory, inventory.equippedItem);
         }
         else
         {
-            itemSO = items[0].ReturnItemSO();
+            EmptyHand(leftHandInventory);
         }
-
-        ui.weaponImage.sprite = itemSO.weaponSprite;
-        ui.abilityImage.sprite = itemSO.weaponSprite;
-
-        ui.weaponText.text = itemSO.name;
-        ui.abilityText.text = itemSO.abilityString;
     }
 
-    void OnDestroy()
+    private void HandleRightInventory(Inventory inventory, List<ItemBase> aRg2)
     {
-        
+        if (inventory.equippedItem != null)
+        {
+            Equip(rightHandInventory, inventory.equippedItem);
+        }
+        else
+        {
+            EmptyHand(rightHandInventory);
+        }
     }
-    
+
+    void Equip(Inventory inventory, ItemBase equippedItem)
+    {
+        if (inventory == leftHandInventory)
+        {
+            leftHandImage.sprite = equippedItem.ReturnItemSO().weaponSprite;
+            leftHandText.text = equippedItem.ReturnItemSO().name;
+        }
+        else
+        {
+            rightHandImage.sprite = equippedItem.ReturnItemSO().weaponSprite;
+            rightHandText.text = equippedItem.ReturnItemSO().name;
+        }
+    }
+
+    void EmptyHand(Inventory inventory)
+    {
+        if (inventory == leftHandInventory)
+        {
+            leftHandImage.sprite = emptyFistSO.weaponSprite;
+            leftHandText.text = emptyFistSO.name;
+            leftEquippedItem = null;
+        }
+        else
+        {
+            rightHandImage.sprite = emptyFistSO.weaponSprite;
+            rightHandText.text = emptyFistSO.name;
+            rightEquippedItem = null;
+        }
+    }
+
+    void OnDisable()
+    {
+        leftHandInventory.AnnounceInventory -= HandleLeftInventory;
+        rightHandInventory.AnnounceInventory -= HandleRightInventory;
+    }
 }

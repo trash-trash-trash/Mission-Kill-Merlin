@@ -1,62 +1,3 @@
-// using System;
-// using UnityEngine;
-//
-// public class Health : MonoBehaviour
-// {
-//     private int currentHP;
-//
-//     public int CurrentHP
-//     {
-//         get { return currentHP; }
-//         set { currentHP = value; }
-//     }
-//
-//     private int maxHP;
-//
-//     public int MaxHP
-//     {
-//         get { return maxHP; }
-//         set { maxHP = value; }
-//     }
-//
-//     private bool alive;
-//     
-//     public bool Alive { get; private set; } = true;
-//
-//     public event Action<int> AnnounceHP;
-//
-//     public void ChangeHP(int value)
-//     {
-//         if (!alive)
-//             return;
-//         
-//         int hp = currentHP += value;
-//
-//         //die
-//         if (hp <= 0)
-//         {
-//             alive = false;
-//             hp = 0;
-//         }
-//         
-//         else if (hp > 0)
-//         {
-//             if (hp > maxHP)
-//                 hp = maxHP;
-//
-//             alive = true;
-//         }
-//         CurrentHP = hp;
-//         AnnounceHP?.Invoke(currentHP);
-//     }
-//
-//     public void ChangeMaxHP(int value)
-//     {
-//         int newMaxHp = maxHP += value;
-//         
-//     }
-// }
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -66,6 +7,7 @@ using UnityEngine;
 [Serializable]
 public enum HealthStatus
 {
+    Fine,
     Bleeding,
     Burning,
     Healing,
@@ -125,6 +67,7 @@ public class Health : MonoBehaviour
     }
 
     public bool HasStatus(HealthStatus s) => statuses.Contains(s);
+    
     public bool CanChangeHP { get; private set; } = true;
 
     public int CurrentHP

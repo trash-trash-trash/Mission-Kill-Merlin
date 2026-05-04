@@ -61,12 +61,12 @@ public class NPCAnthillBase : MonoBehaviour, ISense, IInteractable, IHear
         hp.ChangeHP(hp.maxHP);
     }
 
-    private void CheckArmed(List<ItemBase> aObj)
+    private void CheckArmed(Inventory inventory, List<ItemBase> aObj)
     {
-        if (aObj.Count == 0)
-            hasWeapon = false;
-        else
+        if (inventory.equippedItem !=null)
             hasWeapon = true;
+        else
+            hasWeapon = false;
     }
 
     private void CheckAlive(int aObj)

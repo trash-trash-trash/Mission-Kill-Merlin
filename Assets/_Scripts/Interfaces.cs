@@ -62,6 +62,8 @@ public interface IInventoryObject
     public void Use();
 
     public GameObject ReturnSelf();
+    
+    public ItemBase ReturnItemBase();
 
     public ItemSO ReturnItemSO();
 }

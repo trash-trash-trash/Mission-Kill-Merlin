@@ -11,11 +11,6 @@ public class Use : MonoBehaviour
 
     public event Action<IInventoryObject> AnnounceItemFound;
 
-    public void TryUse()
-    {
-        InteractInSphere();
-    }
-
     public IInventoryObject InteractInSphere()
     {
         Debug.Log("Looking");

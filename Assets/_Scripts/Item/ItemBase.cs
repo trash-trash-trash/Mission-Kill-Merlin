@@ -44,6 +44,11 @@ public class ItemBase : MonoBehaviour, IInventoryObject
         return gameObject;
     }
 
+    public ItemBase ReturnItemBase()
+    {
+        return brain.itemBase;
+    }
+
     public ItemSO ReturnItemSO()
     {
         return brain.itemSO;

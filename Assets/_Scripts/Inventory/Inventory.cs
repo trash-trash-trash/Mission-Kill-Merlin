@@ -14,13 +14,16 @@ public class Inventory : MonoBehaviour
         set { unarmed = value; }
     }
 
-    public event Action<List<ItemBase>> AnnounceInventory;
+    public event Action<Inventory, List<ItemBase>> AnnounceInventory;
 
     public List<ItemBase> inventoryObjects = new List<ItemBase>();
+
+    public ItemBase equippedItem;
 
     public virtual void Equip(ItemBase obj)
     {
         inventoryObjects.Add(obj);
+        equippedItem = obj;
         CheckUnarmed();
     }
 
@@ -28,7 +31,7 @@ public class Inventory : MonoBehaviour
     {
         if (unarmed)
             return;
-        inventoryObjects[0].Use();
+        equippedItem.Use();
     }
 
     public void Unequip(ItemBase obj)
@@ -37,6 +40,7 @@ public class Inventory : MonoBehaviour
         {
             obj.Drop();
             inventoryObjects.Remove(obj);
+            equippedItem = null;
         }
 
         CheckUnarmed();
@@ -47,11 +51,11 @@ public class Inventory : MonoBehaviour
 
     public void CheckUnarmed()
     {
-        if (inventoryObjects.Count == 0)
+        if (equippedItem == null)
             Unarmed = true;
         else
             Unarmed = false;
 
-        AnnounceInventory?.Invoke(inventoryObjects);
+        AnnounceInventory?.Invoke(this, inventoryObjects);
     }
 }

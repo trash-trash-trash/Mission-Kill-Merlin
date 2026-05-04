@@ -4,7 +4,7 @@ public class ItemUseCase : MonoBehaviour
 {
     public static ItemUseCase Instance { get; private set; }
 
-    public ItemSO emptyBottleSO;
+    public GameObject emptyPotionBottle;
 
     private void Awake()
     {
@@ -25,8 +25,11 @@ public class ItemUseCase : MonoBehaviour
         if (itemSO.inventoryObjectType == InventoryObjectType.HealthPotion)
         {
             targetInventory.owner.hp.ChangeHP(itemSO.weaponDamage);
-            itemSO = emptyBottleSO;
-            targetInventory.CheckUnarmed();
+            targetInventory.Unequip(itemBase.ReturnItemBase());
+
+            Destroy(itemBase.ReturnSelf());
+            
+            targetInventory.Equip(Instantiate(emptyPotionBottle.GetComponent<ItemBase>()));
         }
     }
 }
