@@ -29,4 +29,11 @@ public class PlayerBrain : MonoBehaviour, ISense
         canInteract = input;
         AnnounceCanInteract?.Invoke(input);
     }
+
+    public void OnEnable()
+    {
+        int damage = hp.maxHP * 90 / 100;
+        hp.ChangeHP(-damage);
+        Debug.Log($"maxHP: {hp.maxHP}, currentHP: {hp.CurrentHP}, damage: {damage}");
+    }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 [Serializable]
 public struct PuddleData
 {
+    public CharacterBase owner;
+    
     public HealthStatus associatedStatus;
     public int secondsRemainingCharge;
     public float expiryTimerDecayRate;

@@ -1,16 +1,13 @@
 using UnityEngine;
 
-public class IODrop : MonoBehaviour
+public class IODrop  : IOStateBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnEnable()
     {
-        
+        base.OnEnable();
+        inventoryObjectBrain.rb.isKinematic = false;
+        inventoryObjectBrain.rb.useGravity = true;
+        inventoryObjectBrain.HandleEquipped(false);
     }
 }

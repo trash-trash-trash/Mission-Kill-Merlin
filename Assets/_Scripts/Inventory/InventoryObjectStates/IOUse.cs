@@ -13,6 +13,5 @@ public class IOUse : IOStateBase
     {
         yield return new WaitForFixedUpdate();
         ItemUseCase.Instance.UseItem(inventoryObjectBrain.itemBase, inventoryObjectBrain.equippedInventory);
-        inventoryObjectBrain.ChangeState(InventoryObjectState.Equipped);
     }
 }

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PuddleController : MonoBehaviour
 {
+    public static PuddleController Instance { get; private set; }
+    
     public GameObject puddlePrefab;
     
     public List<GameObject> spawnedPuddles = new List<GameObject>();
@@ -12,6 +14,20 @@ public class PuddleController : MonoBehaviour
     public HealthStatus testStatus;
     public int testChargeCount;
     public float testDecay;
+    
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+        // Optional: keep across scenes
+        // DontDestroyOnLoad(gameObject);
+    }
 
     public void TestSpawn()
     {

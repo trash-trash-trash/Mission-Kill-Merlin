@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 830c99bf4f710b24cb1a54ae002c6f84, type: 3}
-  m_Name: HealthPotion
+  m_Name: PotionBottle
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSO
-  name: Health Potion
-  abilityString: Heal
+  name: Potion Bottle
+  abilityString: Use Bottle
   range: 0
   fireRate: 1
   weaponDamage: 10

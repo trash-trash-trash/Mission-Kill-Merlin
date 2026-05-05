@@ -24,9 +24,9 @@ public class ItemBase : MonoBehaviour, IInventoryObject
         brain.Drop();
     }
 
-    public void Aim()
+    public void Aim(bool input)
     {
-        brain.Aim();
+        brain.Aim(input);
     }
 
     public void Throw()

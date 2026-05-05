@@ -1,16 +1,15 @@
 using UnityEngine;
 
-public class IOThrow : MonoBehaviour
+public class IOThrow  : IOStateBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void OnEnable()
     {
-        
-    }
+        base.OnEnable();
 
-    // Update is called once per frame
-    void Update()
-    {
+        inventoryObjectBrain.rb.isKinematic = false;
+        inventoryObjectBrain.rb.useGravity = true;
+        inventoryObjectBrain.lineArc.ThrowRigidBodyAlongArc(inventoryObjectBrain.rb);
         
+        inventoryObjectBrain.HandleEquipped(false);
     }
 }

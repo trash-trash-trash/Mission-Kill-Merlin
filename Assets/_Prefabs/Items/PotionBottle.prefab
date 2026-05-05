@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 7647255793466734597}
   - component: {fileID: 7677714272471154046}
   m_Layer: 0
-  m_Name: Icosphere
+  m_Name: BottleMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 1188816681022879698}
   - component: {fileID: 2082141445550754738}
   m_Layer: 0
-  m_Name: Icosphere.001
+  m_Name: PotionMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,7 +280,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 431ef0b3bcce5104fb4d0602256147fc, type: 2}
+  - {fileID: 2100000, guid: 4b8139c8122215740879f8bb7af7dc32, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

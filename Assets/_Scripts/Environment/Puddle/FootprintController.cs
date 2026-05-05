@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class FootprintController : MonoBehaviour
 {
-    public PuddleController puddleController;
-
     [Header("Footstep Settings")]
     public float forwardOffset = 0.5f;
     public float horizontalOffset = 0.2f;
@@ -20,6 +18,8 @@ public class FootprintController : MonoBehaviour
     
     //combine 
     public HealthStatus mostRecentStatus;
+
+    public Transform transformToSpawnAt;
 
     void Awake()
     {
@@ -44,37 +44,38 @@ public class FootprintController : MonoBehaviour
         if (!spawningFootsteps)
             return;
         
-        float dist = Vector3.Distance(transform.position, lastStepPos);
+        float dist = Vector3.Distance(transformToSpawnAt.position, lastStepPos);
 
         if (dist >= stepDistance)
         {
             SpawnFootstep();
-            lastStepPos = transform.position;
+            lastStepPos = transformToSpawnAt.position;
         }
     }
 
     public void SpawnFootstep()
     {
-        Vector3 basePos = transform.position;
+        Vector3 basePos = transformToSpawnAt.position;
 
         // Forward offset
-        Vector3 forward = transform.forward * forwardOffset;
+        Vector3 forward = transformToSpawnAt.forward * forwardOffset;
 
         // Left/right offset
-        Vector3 side = (isLeftStep ? -transform.right : transform.right) * horizontalOffset;
+        Vector3 side = (isLeftStep ? -transformToSpawnAt.right : transformToSpawnAt.right) * horizontalOffset;
 
         Vector3 spawnPos = basePos + forward + side;
 
-        puddleController.SpawnPuddle(CreatePuddleData(mostRecentStatus), spawnPos);
+        PuddleController.Instance.SpawnPuddle(CreatePuddleData(mostRecentStatus), spawnPos);
 
         // Alternate foot
         isLeftStep = !isLeftStep;
         
-        Debug.DrawLine(transform.position, spawnPos, Color.blue, 1f);
+        Debug.DrawLine(transformToSpawnAt.position, spawnPos, Color.blue, 1f);
     }
 
     private PuddleData CreatePuddleData(HealthStatus newStatus)
     {
+        PuddleController puddleController = PuddleController.Instance;
         return new PuddleData()
         {
             associatedStatus = newStatus,

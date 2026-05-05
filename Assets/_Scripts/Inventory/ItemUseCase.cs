@@ -22,14 +22,25 @@ public class ItemUseCase : MonoBehaviour
         ItemSO itemSO = itemBase.ReturnItemSO();
         Debug.Log($"Using item: "+itemSO.abilityString);
 
-        if (itemSO.inventoryObjectType == InventoryObjectType.HealthPotion)
+        if (itemSO.inventoryObjectType == InventoryObjectType.PotionBottle)
         {
-            targetInventory.owner.hp.ChangeHP(itemSO.weaponDamage);
-            targetInventory.Unequip(itemBase.ReturnItemBase());
-
-            Destroy(itemBase.ReturnSelf());
-            
-            targetInventory.Equip(Instantiate(emptyPotionBottle.GetComponent<ItemBase>()));
+            MagicPotion potion = itemBase.ReturnSelf().GetComponent<MagicPotion>();
+            HealthStatus statusType = potion.magicPotionType;
+            if(statusType==HealthStatus.Fine)
+                Debug.Log("Tried to fill empty bottle!");
+            else
+            {
+                Debug.Log("Drinking from magic bottle! Added "+potion.magicPotionType+" to self!");
+                targetInventory.owner.hp.ChangeHP(itemSO.weaponDamage);
+            }
+            // targetInventory.Unequip(itemBase.ReturnItemBase());
+            //
+            // Destroy(itemBase.ReturnSelf());
+            // GameObject newEmptyPotionBottle = Instantiate(emptyPotionBottle);
+            //
+            // IInventoryObject item = newEmptyPotionBottle.GetComponent<IInventoryObject>();
+            // item.Equip(targetInventory);
+            // targetInventory.Equip(newEmptyPotionBottle.GetComponent<ItemBase>());
         }
     }
 }

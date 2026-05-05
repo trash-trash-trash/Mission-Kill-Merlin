@@ -217,6 +217,15 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpaceBar"",
+                    ""type"": ""Button"",
+                    ""id"": ""a144ba12-389f-48a9-bde8-1601c1d142ad"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -461,6 +470,17 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""R"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""814b8577-3d55-455f-863a-d5b4397fe71e"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpaceBar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -500,6 +520,7 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
         m_InGameActionMap_Control = m_InGameActionMap.FindAction("Control", throwIfNotFound: true);
         m_InGameActionMap_Q = m_InGameActionMap.FindAction("Q", throwIfNotFound: true);
         m_InGameActionMap_R = m_InGameActionMap.FindAction("R", throwIfNotFound: true);
+        m_InGameActionMap_SpaceBar = m_InGameActionMap.FindAction("SpaceBar", throwIfNotFound: true);
     }
 
     ~@HGPlayerControls()
@@ -594,6 +615,7 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_InGameActionMap_Control;
     private readonly InputAction m_InGameActionMap_Q;
     private readonly InputAction m_InGameActionMap_R;
+    private readonly InputAction m_InGameActionMap_SpaceBar;
     /// <summary>
     /// Provides access to input actions defined in input action map "InGameActionMap".
     /// </summary>
@@ -662,6 +684,10 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @R => m_Wrapper.m_InGameActionMap_R;
         /// <summary>
+        /// Provides access to the underlying input action "InGameActionMap/SpaceBar".
+        /// </summary>
+        public InputAction @SpaceBar => m_Wrapper.m_InGameActionMap_SpaceBar;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_InGameActionMap; }
@@ -729,6 +755,9 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
             @R.started += instance.OnR;
             @R.performed += instance.OnR;
             @R.canceled += instance.OnR;
+            @SpaceBar.started += instance.OnSpaceBar;
+            @SpaceBar.performed += instance.OnSpaceBar;
+            @SpaceBar.canceled += instance.OnSpaceBar;
         }
 
         /// <summary>
@@ -782,6 +811,9 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
             @R.started -= instance.OnR;
             @R.performed -= instance.OnR;
             @R.canceled -= instance.OnR;
+            @SpaceBar.started -= instance.OnSpaceBar;
+            @SpaceBar.performed -= instance.OnSpaceBar;
+            @SpaceBar.canceled -= instance.OnSpaceBar;
         }
 
         /// <summary>
@@ -933,5 +965,12 @@ public partial class @HGPlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnR(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SpaceBar" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSpaceBar(InputAction.CallbackContext context);
     }
 }

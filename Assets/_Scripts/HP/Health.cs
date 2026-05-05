@@ -9,10 +9,12 @@ public enum HealthStatus
 {
     Fine,
     Bleeding,
+    BleedingAesthetic,
     Burning,
     Healing,
     Wet,
     Asleep,
+    Lightning,
     Dead
 }
 
@@ -29,6 +31,9 @@ public class Health : MonoBehaviour
     [SerializeField] public int maxHP = 1;
 
     [SerializeField] private bool alive = false;
+
+    public bool canTakeDamage = true;
+    public bool canTakeStatus = true;
 
     public bool Alive
     {
@@ -77,9 +82,6 @@ public class Health : MonoBehaviour
         {
             currentHP = Mathf.Clamp(value, 0, maxHP);
             Alive = currentHP > 0;
-            CanChangeHP &= Alive;
-            if (!Alive)
-                AddStatus(HealthStatus.Dead);
 
             AnnounceHP?.Invoke(currentHP);
         }

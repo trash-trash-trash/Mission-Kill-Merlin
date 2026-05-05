@@ -26,6 +26,8 @@ public class PlayerInputHandler : MonoBehaviour
 
     public event Action<InputAction.CallbackContext> AnnounceShift;
 
+    public event Action<InputAction.CallbackContext> AnnounceSpaceBar;
+
 
     private void Awake()
     {
@@ -52,6 +54,9 @@ public class PlayerInputHandler : MonoBehaviour
         controls.InGameActionMap.SelectInventory02.performed += OnInventory02;
         controls.InGameActionMap.SelectInventory02.canceled += OnInventory02;
 
+        controls.InGameActionMap.SpaceBar.performed += OnSpaceBar;
+        controls.InGameActionMap.SpaceBar.canceled += OnSpaceBar;
+
         controls.InGameActionMap.NextInventory.performed += NextInventory;
         controls.InGameActionMap.NextInventory.canceled += NextInventory;
 
@@ -66,6 +71,11 @@ public class PlayerInputHandler : MonoBehaviour
 
         controls.InGameActionMap.R.performed += OnR;
         controls.InGameActionMap.R.canceled += OnR;
+    }
+
+    private void OnSpaceBar(InputAction.CallbackContext context)
+    {
+        AnnounceSpaceBar?.Invoke(context);
     }
 
 

@@ -26,7 +26,6 @@ public enum InventoryObjectType
 {
     MeleeWeapon,
     RangeWeapon,
-    HealthPotion,
-    EmptyPotionBottle
+    PotionBottle
 }
 

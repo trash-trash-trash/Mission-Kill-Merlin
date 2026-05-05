@@ -20,10 +20,20 @@ public class Inventory : MonoBehaviour
 
     public ItemBase equippedItem;
 
+    public Transform equipPoint;
+
+    public Transform forwardReference;
+
     public virtual void Equip(ItemBase obj)
     {
         inventoryObjects.Add(obj);
         equippedItem = obj;
+
+        Transform objTransform = obj.ReturnSelf().transform;
+        objTransform.SetParent(equipPoint);
+        objTransform.localPosition = equipPoint.localPosition;
+        objTransform.localRotation = equipPoint.localRotation;
+        
         CheckUnarmed();
     }
 

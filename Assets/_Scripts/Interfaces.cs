@@ -55,7 +55,7 @@ public interface IInventoryObject
 
     public void Drop();
 
-    public void Aim();
+    public void Aim(bool input);
     
     public void Throw();
     
