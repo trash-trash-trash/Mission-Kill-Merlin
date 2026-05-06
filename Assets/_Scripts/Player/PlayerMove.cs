@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
 
     public Rigidbody rb;
-    private Vector2 inputDirection;
+    public Vector2 inputDirection;
 
     public Transform cameraArmTransform;
 
@@ -36,6 +36,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (!canMove)
             return;
+        
         //had to flip x/y and max x negative for some reason...
         Vector3 localMove = new Vector3(inputDirection.y, 0, -inputDirection.x);
         

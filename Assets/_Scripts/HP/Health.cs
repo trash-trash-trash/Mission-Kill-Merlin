@@ -21,9 +21,11 @@ public enum HealthStatus
 public class Health : MonoBehaviour
 {
     //condense...
+    public event Action<bool> AnnounceAlive;
+    
     public event Action<int> AnnounceHP;
     public event Action<int> AnnounceHPChangedBy;
-    public event Action<ItemSO> AnnounceHitByWeapon;
+    
     public event Action<List<HealthStatus>> AnnounceHealthStatus;
 
     [SerializeField] private int currentHP;
@@ -39,42 +41,13 @@ public class Health : MonoBehaviour
     {
         get => alive;
         set => alive = value;
+        
     }
-
-    [SerializeField] private List<HealthStatus> statuses = new();
-
-    public IReadOnlyList<HealthStatus> Statuses => statuses;
-
-    void OnEnable()
-    {
-        StartCoroutine(CheckBurning());
-    }
-
-    public void AddStatus(HealthStatus s)
-    {
-        statuses.Add(s);
-        AnnounceHealthStatus?.Invoke(statuses);
-    }
-
-    public int CountStatus(HealthStatus s)
-    {
-        int count = 0;
-        foreach (var status in statuses)
-            if (status == s)
-                count++;
-        return count;
-    }
-
-    public void RemoveStatus(HealthStatus s)
-    {
-        if (statuses.Remove(s))
-            AnnounceHealthStatus?.Invoke(statuses);
-    }
-
-    public bool HasStatus(HealthStatus s) => statuses.Contains(s);
+    
+    public List<EffectStatus> effects = new();
     
     public bool CanChangeHP { get; private set; } = true;
-
+    
     public int CurrentHP
     {
         get { return currentHP; }
@@ -86,6 +59,34 @@ public class Health : MonoBehaviour
             AnnounceHP?.Invoke(currentHP);
         }
     }
+    
+    public void AddEffect(EffectStatus effect)
+    {
+        //water removes fire :)
+        if (effect.type == HealthStatus.Wet)
+        {
+            RemoveEffect(HealthStatus.Burning);
+        }
+
+        effects.Add(effect);
+    }
+
+    public void RemoveEffect(HealthStatus status)
+    {
+        
+        effects.RemoveAll(e => e.type == status);
+    }
+
+    public bool HasEffect(HealthStatus type)
+    {
+        foreach (EffectStatus effect in effects)
+        {
+            if (effect.type == type)
+                return true;
+        }
+
+        return false;
+    }
 
     public virtual void ChangeHP(int value)
     {
@@ -94,60 +95,25 @@ public class Health : MonoBehaviour
 
         CurrentHP += value;
         AnnounceHPChangedBy?.Invoke(value);
-    }
 
-    public virtual void HitByWeapon(ItemSO aItemSo)
-    {
-        AnnounceHitByWeapon?.Invoke(aItemSo);
-
-        //probably not
-        if (aItemSo.weaponDamage == 0)
+        if (CurrentHP <= 0)
         {
-            if (Statuses.Contains(HealthStatus.Asleep))
-                RemoveStatus(HealthStatus.Asleep);
-            else
-                AddStatus(HealthStatus.Asleep);
+            Alive = false;
+            AnnounceAlive?.Invoke(false);
         }
-
-        ChangeHP(aItemSo.weaponDamage);
     }
-
-
-    //TODO: Fix hardcoding values
-    IEnumerator CheckBurning()
+    
+    void Update()
     {
-        while (true)
+        if (!Alive) return;
+
+        for (int i = effects.Count - 1; i >= 0; i--)
         {
-            yield return new WaitForSeconds(1f);
+            bool finished = effects[i].Tick(this, Time.deltaTime);
 
-            if (!Alive)
-                continue;
-
-            int healCount = CountStatus(HealthStatus.Healing);
-            for (int i = 0; i < healCount; i++)
+            if (finished)
             {
-                yield return new WaitForFixedUpdate();
-                ChangeHP(1);
-            }
-
-            if (Statuses.Contains(HealthStatus.Wet))
-            {
-                statuses.RemoveAll(s => s == HealthStatus.Burning);
-                continue;
-            }
-
-            int burnCount = CountStatus(HealthStatus.Burning);
-            for (int i = 0; i < burnCount; i++)
-            {
-                yield return new WaitForFixedUpdate();
-                ChangeHP(-1);
-            }
-
-            int bleedCount = CountStatus(HealthStatus.Bleeding);
-            for (int i = 0; i < bleedCount; i++)
-            {
-                yield return new WaitForFixedUpdate();
-                ChangeHP(-1);
+                effects.RemoveAt(i);
             }
         }
     }

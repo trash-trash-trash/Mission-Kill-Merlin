@@ -39,12 +39,12 @@ public class PlayerHealthView : MonoBehaviour
     {
         var counts = new Dictionary<HealthStatus, int>();
 
-        foreach (HealthStatus status in health.Statuses)
+        foreach (EffectStatus status in health.effects)
         {
-            if (!counts.ContainsKey(status))
-                counts[status] = 0;
+            if (!counts.ContainsKey(status.type))
+                counts[status.type] = 0;
 
-            counts[status]++;
+            counts[status.type]++;
         }
 
         int index = 0;

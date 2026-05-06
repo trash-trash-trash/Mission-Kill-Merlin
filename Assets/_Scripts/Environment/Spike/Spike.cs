@@ -20,7 +20,7 @@ public class Spike : MonoBehaviour
             float random = UnityEngine.Random.Range(0f, 1f);
             if (random <= bleedChance)
             {
-                health.AddStatus(HealthStatus.Bleeding);
+//                health.AddStatus(HealthStatus.Bleeding);
                 Debug.Log("pointy spike added bleeding");
             }
         }

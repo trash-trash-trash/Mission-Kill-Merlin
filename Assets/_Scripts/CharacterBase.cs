@@ -16,16 +16,6 @@ public class CharacterBase : MonoBehaviour, ICharacter
         if (hp != null)
         {
             hp.AnnounceHPChangedBy += React;
-            hp.AnnounceHitByWeapon += ReactToWeapon;
-        }
-    }
-
-    private void ReactToWeapon(ItemSO obj)
-    {
-        if (obj.weaponDamage == 0)
-        {
-            AnnounceSlept?.Invoke();
-            Debug.Log("hit by tranq!");
         }
     }
 
@@ -52,7 +42,6 @@ public class CharacterBase : MonoBehaviour, ICharacter
         if (hp != null)
         {
             hp.AnnounceHPChangedBy -= React;
-            hp.AnnounceHitByWeapon -= ReactToWeapon;
         }
     }
 }

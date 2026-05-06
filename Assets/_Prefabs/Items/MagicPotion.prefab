@@ -157,10 +157,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MagicPotionView
   mP: {fileID: 4228417094759549417}
-  bleedMat: {fileID: 2100000, guid: bcea2a7f378b98c478c91075d2e813bf, type: 2}
-  burningMat: {fileID: 2100000, guid: 2424020a341a4b940968315308f82ccf, type: 2}
-  healMat: {fileID: 2100000, guid: 723eb5258157b124e8d2016404e2fa63, type: 2}
-  lightningMat: {fileID: 2100000, guid: 4b8139c8122215740879f8bb7af7dc32, type: 2}
   potionRenderer: {fileID: 175243859056339862}
 --- !u!1 &538950709524284700
 GameObject:
@@ -387,7 +383,6 @@ GameObject:
   - component: {fileID: 3226268408418761964}
   - component: {fileID: 6153966356846276244}
   - component: {fileID: 4228417094759549417}
-  - component: {fileID: 1281597018709361317}
   - component: {fileID: 7052040702249061542}
   - component: {fileID: 5566050498603097598}
   - component: {fileID: 4638937528963168455}
@@ -515,19 +510,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2ed35b7f7dc5245a2cf2e1834dcc1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MagicPotion
-  magicPotionType: 4
---- !u!114 &1281597018709361317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3086634771080653942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98f6247eceabb224fb4383349eac612f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InventoryObjectBrain
   itemSO: {fileID: 11400000, guid: 6330d458f89e564468e986da70655bb2, type: 2}
   itemBase: {fileID: 7052040702249061542}
   equippedInventory: {fileID: 0}
@@ -536,10 +518,10 @@ MonoBehaviour:
   lineArc: {fileID: 5566050498603097598}
   rb: {fileID: 4638937528963168455}
   sound: {fileID: 619728554208797949}
-  canEquip: 0
+  canEquip: 1
   equipped: 0
   canUse: 0
-  currentState: 5
+  currentState: 0
   idleState: {fileID: 5521926181901072126}
   equippedState: {fileID: 4121540165196183922}
   useState: {fileID: 2018897484317605507}
@@ -547,6 +529,18 @@ MonoBehaviour:
   throwState: {fileID: 784779313927606156}
   dropState: {fileID: 538950709524284700}
   brokenState: {fileID: 1307508177401906144}
+  magicPotionType: 4
+  normalPotionParts:
+  - {fileID: 4265158340713180002}
+  - {fileID: 1653379296431714525}
+  - {fileID: 3010241486550959734}
+  brokenPotionParts:
+  - {fileID: 1455625539691095946}
+  - {fileID: 9143572718550906522}
+  - {fileID: 7801052865280065084}
+  - {fileID: 419073142677016326}
+  - {fileID: 7593700316889197687}
+  - {fileID: 2011226268113757058}
 --- !u!114 &7052040702249061542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,7 +553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdde3ae998a3b8b4782df1df8e6d9407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemBase
-  brain: {fileID: 1281597018709361317}
+  brain: {fileID: 4228417094759549417}
 --- !u!114 &5566050498603097598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,7 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b87dcdb19530d2a4aa3e77197621c941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RigidbodyDamageThreshold
-  speedThreshold: 5
+  speedThreshold: 15
   validLayers:
     serializedVersion: 2
     m_Bits: 2688
@@ -641,7 +635,7 @@ MonoBehaviour:
   alive: 0
   canTakeDamage: 1
   canTakeStatus: 1
-  statuses: 
+  effects: []
 --- !u!1 &4121540165196183922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,8 +1004,53 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2082141445550754738, guid: c3e740a559a029646a556dd4618cda8b, type: 3}
   m_PrefabInstance: {fileID: 2201090064450379812}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &419073142677016326 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1971185814677188386, guid: c3e740a559a029646a556dd4618cda8b, type: 3}
+  m_PrefabInstance: {fileID: 2201090064450379812}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1455625539691095946 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 772574555942340526, guid: c3e740a559a029646a556dd4618cda8b, type: 3}
+  m_PrefabInstance: {fileID: 2201090064450379812}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1653379296431714525 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 610849583588233465, guid: c3e740a559a029646a556dd4618cda8b, type: 3}
+  m_PrefabInstance: {fileID: 2201090064450379812}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2011226268113757058 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 388040068808180646, guid: c3e740a559a029646a556dd4618cda8b, type: 3}
+  m_PrefabInstance: {fileID: 2201090064450379812}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3010241486550959734 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3984930781070321234, guid: c3e740a559a029646a556dd4618cda8b, type: 3}
+  m_PrefabInstance: {fileID: 2201090064450379812}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4265158340713180002 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2718825253264689990, guid: c3e740a559a029646a556dd4618cda8b, type: 3}
+  m_PrefabInstance: {fileID: 2201090064450379812}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7122748621669605909 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8958435786696540721, guid: c3e740a559a029646a556dd4618cda8b, type: 3}
+  m_PrefabInstance: {fileID: 2201090064450379812}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7593700316889197687 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8640694594482687059, guid: c3e740a559a029646a556dd4618cda8b, type: 3}
+  m_PrefabInstance: {fileID: 2201090064450379812}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7801052865280065084 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8271212558300175896, guid: c3e740a559a029646a556dd4618cda8b, type: 3}
+  m_PrefabInstance: {fileID: 2201090064450379812}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9143572718550906522 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6948958778663966398, guid: c3e740a559a029646a556dd4618cda8b, type: 3}
   m_PrefabInstance: {fileID: 2201090064450379812}
   m_PrefabAsset: {fileID: 0}

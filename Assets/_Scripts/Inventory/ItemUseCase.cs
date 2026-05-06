@@ -4,8 +4,6 @@ public class ItemUseCase : MonoBehaviour
 {
     public static ItemUseCase Instance { get; private set; }
 
-    public GameObject emptyPotionBottle;
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -32,8 +30,11 @@ public class ItemUseCase : MonoBehaviour
             {
                 Debug.Log("Drinking from magic bottle! Added "+potion.magicPotionType+" to self!");
                 targetInventory.owner.hp.ChangeHP(itemSO.weaponDamage);
+                targetInventory.Unequip(itemBase.ReturnItemBase());
+                potion.SetBottle(HealthStatus.Fine);
+                targetInventory.Equip(itemBase.ReturnItemBase());
             }
-            // targetInventory.Unequip(itemBase.ReturnItemBase());
+            // 
             //
             // Destroy(itemBase.ReturnSelf());
             // GameObject newEmptyPotionBottle = Instantiate(emptyPotionBottle);

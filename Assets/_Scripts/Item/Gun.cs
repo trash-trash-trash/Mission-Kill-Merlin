@@ -107,7 +107,7 @@ public class Gun : MonoBehaviour
                     hp = hit.collider.gameObject.GetComponentInParent<Health>();
                 if (hp != null)
                 {
-                    hp.HitByWeapon(equippedItemSo);
+                    //hp.HitByWeapon(equippedItemSo);
                     Debug.Log("Shot "+hit.collider.gameObject.name); 
                     
                     Rigidbody rb = hit.collider.gameObject.GetComponent<Rigidbody>();

@@ -66,96 +66,62 @@ public class PlayerInventory : MonoBehaviour
 
     private void FlipLeftClick(InputAction.CallbackContext input)
     {
-        if (input.performed)
-        {
-            leftClickHeld = true;
-            leftClickStartedAsAim = false;
-
-            if (shiftHeld && leftHandObject != null)
-            {
-                Debug.Log("Aiming " + leftHandObject.name);
-                leftClickStartedAsAim = true;
-                leftHandObject.Aim(true);
-                return;
-            }
-
-            if (leftHandObject == null)
-            {
-                IInventoryObject found = use.InteractInSphere();
-                if (found != null)
-                {
-                    Debug.Log("Picked up " + found.ReturnSelf().name);
-                    EquipLeftRight(found, true);
-                }
-            }
-            else
-            {
-                Debug.Log("Using left hand " + leftHandObject.name);
-                leftHandObject.Use();
-            }
-        }
-
-        else
-        {
-            if (shiftHeld && leftHandObject != null && leftClickStartedAsAim)
-            {
-                Debug.Log("Throwing " + leftHandObject.name);
-                leftHandObject.Throw();
-            }
-            else if (!shiftHeld && leftHandObject != null)
-            {
-                Debug.Log("Just holding " + leftHandObject.name);
-                leftHandObject.Aim(false);
-            }
-
-            leftClickHeld = false;
-        }
+        HandleClick(input, true);
     }
 
     private void FlipRightClick(InputAction.CallbackContext input)
     {
+        HandleClick(input, false);
+    }
+
+    private void HandleClick(InputAction.CallbackContext input, bool isLeft)
+    {
+        ref bool clickHeld = ref (isLeft ? ref leftClickHeld : ref rightClickHeld);
+        ref bool startedAsAim = ref (isLeft ? ref leftClickStartedAsAim : ref rightClickStartedAsAim);
+        ItemBase item = isLeft ? leftHandObject : rightHandObject;
+
         if (input.performed)
         {
-            rightClickHeld = true;
-            rightClickStartedAsAim = false;
+            clickHeld = true;
+            startedAsAim = false;
 
-            if (shiftHeld && rightHandObject != null)
+            if (shiftHeld && item != null)
             {
-                Debug.Log("Aiming " + rightHandObject.name);
-                rightClickStartedAsAim = true;
-                rightHandObject.Aim(true);
+                Debug.Log($"Aiming {item.name}");
+                startedAsAim = true;
+                item.Aim(true);
                 return;
             }
 
-            if (rightHandObject == null)
+            if (item == null)
             {
-                IInventoryObject found = use.InteractInSphere();
+                var found = use.InteractInSphere();
                 if (found != null)
                 {
-                    Debug.Log("Picked up " + found.ReturnSelf().name);
-                    EquipLeftRight(found, false);
+                    Debug.Log($"Picked up {found.ReturnSelf().name}");
+                    EquipLeftRight(found, isLeft);
                 }
             }
             else
             {
-                Debug.Log("Using right hand " + rightHandObject.name);
-                rightHandObject.Use();
+                Debug.Log($"Using {(isLeft ? "left" : "right")} hand {item.name}");
+                item.Use();
             }
         }
         else
         {
-            if (shiftHeld && rightHandObject != null && rightClickStartedAsAim)
+            if (shiftHeld && item != null && startedAsAim)
             {
-                Debug.Log("Throwing " + rightHandObject.name);
-                rightHandObject.Throw();
+                Debug.Log($"Throwing {item.name}");
+                item.Throw();
             }
-            else if (!shiftHeld && rightHandObject != null)
+            else if (!shiftHeld && item != null)
             {
-                Debug.Log("Just holding " + rightHandObject.name);
-                rightHandObject.Aim(false);
+                Debug.Log($"Just holding {item.name}");
+                item.Aim(false);
             }
 
-            rightClickHeld = false;
+            clickHeld = false;
         }
     }
     

@@ -13,5 +13,4 @@ public class AttackInfo
     public CharacterBase attackOwner;
     public AttackType attackType;
     public int damage;
-    public HealthStatus effect;
 }

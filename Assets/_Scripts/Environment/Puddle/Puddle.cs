@@ -82,7 +82,13 @@ public class Puddle : MonoBehaviour
             if (other.GetComponentInParent<Health>() != null)
             {
                 Health health = other.GetComponentInParent<Health>();
-                health.AddStatus(data.associatedStatus);
+                EffectStatus effect = new EffectStatus()
+                {
+                    amount = 2,
+                    charges = 2,
+                    type = data.associatedStatus
+                };
+                health.AddEffect(effect);
             }
         }
     }

@@ -60,7 +60,7 @@ public class InventoryObjectBrain : MonoBehaviour
         ChangeState(InventoryObjectState.Broken);
     }
 
-    public void ChangeState(InventoryObjectState newState)
+    public virtual void ChangeState(InventoryObjectState newState)
     {
         if (statesDict.TryGetValue(currentState, out GameObject currentGO) && currentGO != null)
         {

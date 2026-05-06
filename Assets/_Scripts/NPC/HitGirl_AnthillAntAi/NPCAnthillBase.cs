@@ -158,7 +158,7 @@ public class NPCAnthillBase : MonoBehaviour, ISense, IInteractable, IHear
                 alert = true;
         }
 
-        else if (obj.hp.HasStatus(HealthStatus.Asleep))
+        else if (obj.hp.HasEffect(HealthStatus.Asleep))
         {
             MemoryData newMemory = new MemoryData()
             {
@@ -269,7 +269,7 @@ public class NPCAnthillBase : MonoBehaviour, ISense, IInteractable, IHear
         else if (actionType == CharacterActions.WakeUp)
             if (!awake)
             {
-                hp.RemoveStatus(HealthStatus.Asleep);
+                hp.RemoveEffect(HealthStatus.Asleep);
             }
 
         return true;

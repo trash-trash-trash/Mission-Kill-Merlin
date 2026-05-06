@@ -136,7 +136,7 @@ public class EnergyBall : MonoBehaviour
                 rb.AddForce(dir * explodeForce, ForceMode.VelocityChange);
             }
 
-            h.AddStatus(statusAffliction);
+            h.HasEffect(statusAffliction);
             Debug.Log("Exploded " + h.gameObject.name);
         }
 
