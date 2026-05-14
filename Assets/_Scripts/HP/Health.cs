@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 [Serializable]
@@ -22,11 +20,10 @@ public class Health : MonoBehaviour
 {
     //condense...
     public event Action<bool> AnnounceAlive;
-    
+
     public event Action<int> AnnounceHP;
-    public event Action<int> AnnounceHPChangedBy;
-    
-    public event Action<List<HealthStatus>> AnnounceHealthStatus;
+
+    public event Action<List<EffectStatus>> AnnounceHealthStatus;
 
     [SerializeField] private int currentHP;
 
@@ -41,13 +38,12 @@ public class Health : MonoBehaviour
     {
         get => alive;
         set => alive = value;
-        
     }
-    
+
     public List<EffectStatus> effects = new();
-    
+
     public bool CanChangeHP { get; private set; } = true;
-    
+
     public int CurrentHP
     {
         get { return currentHP; }
@@ -57,9 +53,11 @@ public class Health : MonoBehaviour
             Alive = currentHP > 0;
 
             AnnounceHP?.Invoke(currentHP);
+
+            AnnounceAlive?.Invoke(alive);
         }
     }
-    
+
     public void AddEffect(EffectStatus effect)
     {
         //water removes fire :)
@@ -69,12 +67,15 @@ public class Health : MonoBehaviour
         }
 
         effects.Add(effect);
+
+        AnnounceHealthStatus?.Invoke(effects);
     }
 
     public void RemoveEffect(HealthStatus status)
     {
-        
         effects.RemoveAll(e => e.type == status);
+
+        AnnounceHealthStatus?.Invoke(effects);
     }
 
     public bool HasEffect(HealthStatus type)
@@ -94,7 +95,6 @@ public class Health : MonoBehaviour
             return;
 
         CurrentHP += value;
-        AnnounceHPChangedBy?.Invoke(value);
 
         if (CurrentHP <= 0)
         {
@@ -102,7 +102,7 @@ public class Health : MonoBehaviour
             AnnounceAlive?.Invoke(false);
         }
     }
-    
+
     void Update()
     {
         if (!Alive) return;

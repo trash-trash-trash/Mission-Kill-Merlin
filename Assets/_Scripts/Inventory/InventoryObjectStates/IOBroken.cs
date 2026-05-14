@@ -10,19 +10,27 @@ public class IOBroken : IOStateBase
         audioSource.Play();
         inventoryObjectBrain.HandleEquipped(false);
         inventoryObjectBrain.sound.EmitSound(null);
-        
+
         //for potions only...?
 
-        PuddleData newPuddleData = new PuddleData()
+        MagicPotion mp = GetComponentInParent<MagicPotion>();
+        if (mp != null)
         {
-            owner = null,
-            //hack
-            associatedStatus = inventoryObjectBrain.GetComponent<MagicPotion>().magicPotionType,
-            secondsRemainingCharge = 10,
-            expiryTimerDecayRate = 1,
-            originalSecondsRemainingCharge = 10
-        };
-        
-        PuddleController.Instance.SpawnPuddle(newPuddleData, inventoryObjectBrain.gameObject.transform.position);
+            if (mp.magicPotionType != HealthStatus.Fine)
+            {
+                PuddleData newPuddleData = new PuddleData()
+                {
+                    owner = null,
+                    //hack
+                    associatedStatus = mp.magicPotionType,
+                    secondsRemainingCharge = 10,
+                    expiryTimerDecayRate = 1,
+                    originalSecondsRemainingCharge = 10
+                };
+
+                PuddleController.Instance.SpawnPuddle(newPuddleData,
+                    inventoryObjectBrain.gameObject.transform.position);
+            }
+        }
     }
 }

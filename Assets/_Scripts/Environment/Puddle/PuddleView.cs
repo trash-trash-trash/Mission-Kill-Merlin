@@ -18,10 +18,13 @@ public class PuddleView : MonoBehaviour
 
     private void SetMaterial(Puddle aObj)
     {
-        if (GlowingMatsDict.Instance.materialsDict.TryGetValue(aObj.data.associatedStatus, out Material mat))
-        {
-            renderer.material = mat;
-        }
+        renderer.material = GlowingMatsDict.Instance.GetMaterial(aObj.data.associatedStatus);
+        //
+        //
+        // if (GlowingMatsDict.Instance.materialsDict.TryGetValue(aObj.data.associatedStatus, out Material mat))
+        // {
+        //     renderer.material = mat;
+        // }
     }
 
     void OnDisable()

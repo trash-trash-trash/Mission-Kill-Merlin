@@ -4,9 +4,7 @@ using UnityEngine;
 public class MagicPotionView : MonoBehaviour
 {
     public MagicPotion mP;
-
- 
-
+    
     public Renderer potionRenderer;
 
     void Start()

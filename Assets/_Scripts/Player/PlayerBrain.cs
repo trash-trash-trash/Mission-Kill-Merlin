@@ -38,6 +38,8 @@ public class PlayerBrain : MonoBehaviour
         statesDict.Add(PlayerState.TakeDamage, takeDamageStateObj);
         statesDict.Add(PlayerState.Death, deathStateObj);
         
+        health.ChangeHP(-health.maxHP * 100 / 90);
+        
         ChangeState(PlayerState.Idle);
     }
 

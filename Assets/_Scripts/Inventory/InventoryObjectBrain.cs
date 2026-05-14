@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -45,7 +46,9 @@ public class InventoryObjectBrain : MonoBehaviour
         ChangeState(InventoryObjectState.Idle);
 
         health.AnnounceHP += ItemHealthBroke;
-        impact.AnnounceHardImpact += ItemImpactBroke;
+
+        if (impact != null)
+            impact.AnnounceHardImpact += ItemImpactBroke;
     }
 
 
@@ -83,14 +86,14 @@ public class InventoryObjectBrain : MonoBehaviour
             rb.useGravity = false;
             rb.rotation = equippedInventory.equipPoint.rotation;
             rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+//            rb.angularVelocity = Vector3.zero;
             equipped = true;
             canEquip = false;
             canUse = true;
 
             health.canTakeDamage = false;
             impact.checkingForImpact = false;
-            
+
             lineArc.forwardReference = equippedInventory.forwardReference;
             lineArc.startPoint = equippedInventory.equipPoint;
         }
@@ -105,8 +108,8 @@ public class InventoryObjectBrain : MonoBehaviour
 
             health.canTakeDamage = true;
             impact.checkingForImpact = true;
-            
-            if(equippedInventory!=null)
+
+            if (equippedInventory != null)
             {
                 equippedInventory.Unequip(itemBase);
                 equippedInventory = null;
@@ -171,6 +174,14 @@ public class InventoryObjectBrain : MonoBehaviour
     public ItemSO ReturnItemSO()
     {
         return itemSO;
+    }
+
+    private void OnDisable()
+    {
+        health.AnnounceHP -= ItemHealthBroke;
+
+        if (impact != null)
+            impact.AnnounceHardImpact -= ItemImpactBroke;
     }
 }
 

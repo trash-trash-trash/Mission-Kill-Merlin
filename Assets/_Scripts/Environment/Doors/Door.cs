@@ -19,7 +19,6 @@ public class Door : MonoBehaviour, IInteractable
 
     void Start()
     { 
-        InteractableRegistry.Register(this);
         initialRotation = pivot.rotation;
     }
     

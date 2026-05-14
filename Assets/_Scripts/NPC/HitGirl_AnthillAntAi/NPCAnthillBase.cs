@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class NPCAnthillBase : MonoBehaviour, ISense, IInteractable, IHear
 {
     public CharacterBase characterBase;
-    public Clothes clothes;
     public NPCInventory inventory;
     public Health hp;
     public Memory memory;
@@ -49,10 +48,8 @@ public class NPCAnthillBase : MonoBehaviour, ISense, IInteractable, IHear
 
     void Start()
     {
-        characterBase.AnnounceSlept += Slept;
-        characterBase.AnnounceShoved += Shoved;
         hp.AnnounceHP += CheckAlive;
-        hp.AnnounceHealthStatus += SetStatus;
+        //hp.AnnounceHealthStatus += SetStatus;
         inventory.AnnounceInventory += CheckArmed;
         memory.AnnounceMemory += CheckMemory;
         sight.AnnounceCanSeeCharacter += CheckCharacter;
@@ -120,11 +117,6 @@ public class NPCAnthillBase : MonoBehaviour, ISense, IInteractable, IHear
             CanHear = true;
             sight.CanSee = true;
         }
-    }
-
-    private void Slept()
-    {
-        awake = false;
     }
 
     private void CheckCharacter(CharacterBase obj)
@@ -212,11 +204,6 @@ public class NPCAnthillBase : MonoBehaviour, ISense, IInteractable, IHear
         }
     }
 
-    private void Shoved()
-    {
-        shoved = true;
-    }
-
     public void HeardSound(SoundData sound)
     {
         if (!CanHear)
@@ -260,17 +247,6 @@ public class NPCAnthillBase : MonoBehaviour, ISense, IInteractable, IHear
     {
         if (!canInteract)
             return false;
-        //fix
-        if (actionType == CharacterActions.Undress)
-        {
-            if (!awake || !hp.Alive)
-                clothes.Undress();
-        }
-        else if (actionType == CharacterActions.WakeUp)
-            if (!awake)
-            {
-                hp.RemoveEffect(HealthStatus.Asleep);
-            }
 
         return true;
     }

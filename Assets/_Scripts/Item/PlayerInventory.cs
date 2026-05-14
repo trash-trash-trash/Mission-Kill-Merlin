@@ -22,7 +22,6 @@ public class PlayerInventory : MonoBehaviour
     public ItemBase leftHandObject = null;
     public ItemBase rightHandObject = null;
 
-    public LineRenderer line;
     public Use use;
 
     public bool canInteract = true;

@@ -20,7 +20,7 @@ public class PlayerHealthView : MonoBehaviour
         slider.value = health.CurrentHP;
 
         health.AnnounceHP += SetHP;
-        health.AnnounceHealthStatus += UpdateStatuses;
+        //health.AnnounceHealthStatus += UpdateStatuses;
 
         RefreshStatuses();
     }
@@ -81,6 +81,6 @@ public class PlayerHealthView : MonoBehaviour
     void OnDisable()
     {
         health.AnnounceHP -= SetHP;
-        health.AnnounceHealthStatus -= UpdateStatuses;
+      //  health.AnnounceHealthStatus -= UpdateStatuses;
     }
 }

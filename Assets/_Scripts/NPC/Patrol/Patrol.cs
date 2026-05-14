@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Patrol : MonoBehaviour, IInteract
 {
     //make this the generic pathfinding navmesh for all states to use
-    
+
     [SerializeField] private PatrolPoint currentPoint;
     [SerializeField] private List<PatrolPoint> patrolPoints;
     public float currentDistFromTarget;
@@ -26,7 +27,7 @@ public class Patrol : MonoBehaviour, IInteract
     {
         patrolling = input;
     }
-    
+
     public void StartPatrol(List<PatrolPoint> newPatrolPoints)
     {
         patrolPoints = newPatrolPoints;
@@ -40,33 +41,19 @@ public class Patrol : MonoBehaviour, IInteract
     {
         NavMeshPath path = new NavMeshPath();
         agent.CalculatePath(currentPoint.transform.position, path);
-        IInteractable blockingDoor = InteractableRegistry.FindBlockingDoor(path);
 
-        if (blockingDoor != null)
-        {
-            GameObject doorObj = blockingDoor.ReturnSelf();
-            nextDoor = doorObj.GetComponent<Door>();
-        }
-
-        if (nextDoor != null && !nextDoor.open)
-        {
-            openingDoor = true;
-            Debug.Log("door in my way");
-            agent.SetDestination(nextDoor.ReturnSelf().transform.position);
-        }
-        else
-            agent.SetDestination(currentPoint.transform.position);
+        agent.SetDestination(currentPoint.transform.position);
     }
 
     private void FixedUpdate()
     {
         if (agent.hasPath)
             currentDistFromTarget = agent.remainingDistance;
-        
+
         //make better later
         if (!patrolling || !agent.enabled)
             return;
-        
+
         if (hasOpenedDoor && prevDoor != null)
         {
             float distance = Vector3.Distance(agent.transform.position, prevDoor.transform.position);
@@ -77,7 +64,7 @@ public class Patrol : MonoBehaviour, IInteract
                 prevDoor = null;
             }
         }
-        
+
         if (agent.remainingDistance <= patrolPointArrivalThreshold && !agent.pathPending)
         {
             GoToNextPoint();
@@ -85,34 +72,32 @@ public class Patrol : MonoBehaviour, IInteract
     }
 
     private void GoToNextPoint()
-    { 
+    {
         if (openingDoor)
-             {
-                 if (!nextDoor.open)
-                 {
-                     nextDoor.Interact(this, CharacterActions.Use);
-                     prevDoor = nextDoor;
-                     hasOpenedDoor = true;
-                     CalculatePath();
-                 }
+        {
+            if (!nextDoor.open)
+            {
+                nextDoor.Interact(this, CharacterActions.Use);
+                prevDoor = nextDoor;
+                hasOpenedDoor = true;
+                CalculatePath();
+            }
 
-                 else if (nextDoor.open)
-                 {
-                     openingDoor = false;
-                     CalculatePath();
-                 }
-             }
+            else if (nextDoor.open)
+            {
+                openingDoor = false;
+                CalculatePath();
+            }
+        }
         else
         {
             currentPointIndex = (currentPointIndex + 1) % patrolPoints.Count;
             currentPoint = patrolPoints[currentPointIndex];
             CalculatePath();
         }
-
     }
 
     public void CanInteract(bool canInteract)
     {
-        
     }
 }

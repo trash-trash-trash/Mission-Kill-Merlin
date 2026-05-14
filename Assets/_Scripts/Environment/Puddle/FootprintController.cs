@@ -26,12 +26,12 @@ public class FootprintController : MonoBehaviour
         health.AnnounceHealthStatus += StartStopFootsteps;
     }
 
-    private void StartStopFootsteps(List<HealthStatus> aHealthStatusList)
+    private void StartStopFootsteps(List<EffectStatus> aHealthStatusList)
     {
         if (aHealthStatusList.Count > 0)
         {
             spawningFootsteps = true;
-            mostRecentStatus = aHealthStatusList[0];
+            mostRecentStatus = aHealthStatusList[0].type;
         }
         else
         {

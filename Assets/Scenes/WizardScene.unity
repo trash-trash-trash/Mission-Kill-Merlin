@@ -263,7 +263,7 @@ MonoBehaviour:
   spawnedPuddles: []
   availablePuddles: []
   unavailablePuddles: []
-  testStatus: 2
+  testStatus: 4
   testChargeCount: 10
   testDecay: 1
 --- !u!114 &251068005
@@ -1433,7 +1433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4787895611818231641, guid: c65857ce7d605a441b53958a8a553914, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1466,7 +1466,7 @@ Transform:
   m_GameObject: {fileID: 996152769}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.30841634, z: 0, w: -0.9512515}
-  m_LocalPosition: {x: -36.213642, y: 22.7927, z: -79.33497}
+  m_LocalPosition: {x: 1.0032005, y: 13.88, z: -37.936157}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2558,7 +2558,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e138ddde8b24d440a52e5973690de0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemUseCase
-  emptyPotionBottle: {fileID: 2660743795483669126, guid: be6637f77927a3d43907d68edd5bf508, type: 3}
 --- !u!1 &1910922023
 GameObject:
   m_ObjectHideFlags: 0
@@ -2658,6 +2657,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MagicPotion
       objectReference: {fileID: 0}
+    - target: {fileID: 3086634771080653942, guid: 6b01126950196d14593f228b6cce13e6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7122748621669605909, guid: 6b01126950196d14593f228b6cce13e6, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -2724,9 +2727,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2411747595135803175, guid: d9972e511d2a99f449e4d781c50652f8, type: 3}
+      propertyPath: mostRecentStatus
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2411747595135803175, guid: d9972e511d2a99f449e4d781c50652f8, type: 3}
       propertyPath: puddleController
       value: 
       objectReference: {fileID: 251068004}
+    - target: {fileID: 2411747595135803175, guid: d9972e511d2a99f449e4d781c50652f8, type: 3}
+      propertyPath: spawningFootsteps
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2513195034547478521, guid: d9972e511d2a99f449e4d781c50652f8, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
