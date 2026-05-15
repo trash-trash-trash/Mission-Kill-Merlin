@@ -139,11 +139,9 @@ public class Gun : MonoBehaviour
     
     IEnumerator ShootCooldownCoro()
     { 
-        player.AggroAction = true;
         canShoot = false;
         yield return new WaitForSeconds(shootCooldownTime);
         canShoot = true;
-        player.AggroAction = false;
     }
 
     public void AggroAction()

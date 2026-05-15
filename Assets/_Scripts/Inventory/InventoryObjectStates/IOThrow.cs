@@ -8,7 +8,7 @@ public class IOThrow  : IOStateBase
 
         inventoryObjectBrain.rb.isKinematic = false;
         inventoryObjectBrain.rb.useGravity = true;
-        inventoryObjectBrain.lineArc.ThrowRigidBodyAlongArc(inventoryObjectBrain.rb);
+        inventoryObjectBrain.equippedInventory.lineArc.ThrowRigidBodyAlongArc(inventoryObjectBrain.rb);
         
         inventoryObjectBrain.HandleEquipped(false);
     }

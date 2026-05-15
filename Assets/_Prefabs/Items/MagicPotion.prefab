@@ -384,7 +384,6 @@ GameObject:
   - component: {fileID: 6153966356846276244}
   - component: {fileID: 4228417094759549417}
   - component: {fileID: 7052040702249061542}
-  - component: {fileID: 5566050498603097598}
   - component: {fileID: 4638937528963168455}
   - component: {fileID: 4521647262610983046}
   - component: {fileID: 1632618939188423473}
@@ -515,7 +514,7 @@ MonoBehaviour:
   equippedInventory: {fileID: 0}
   health: {fileID: 1632618939188423473}
   impact: {fileID: 4521647262610983046}
-  lineArc: {fileID: 5566050498603097598}
+  lineArc: {fileID: 0}
   rb: {fileID: 4638937528963168455}
   sound: {fileID: 619728554208797949}
   canEquip: 1
@@ -554,26 +553,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemBase
   brain: {fileID: 4228417094759549417}
---- !u!114 &5566050498603097598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3086634771080653942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc4eca7bfb5616543a32c7629207d9ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LineArc
-  line: {fileID: 7147500728544063501}
-  resolution: 20
-  distance: 15
-  arcHeight: 4
-  startPoint: {fileID: 0}
-  forwardReference: {fileID: 0}
-  drawingArc: 0
-  forceMultiplier: 3
 --- !u!54 &4638937528963168455
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -123,7 +123,7 @@ public class PlayerInventory : MonoBehaviour
             clickHeld = false;
         }
     }
-    
+
     private void EquipLeftRight(IInventoryObject obj, bool left)
     {
         if (left)
@@ -138,5 +138,15 @@ public class PlayerInventory : MonoBehaviour
             rightHandInventory.Equip(rightHandObject);
             obj.Equip(rightHandInventory);
         }
+    }
+
+    void OnDisable()
+    {
+        playerInputHandler.AnnounceLeftClick -= FlipLeftClick;
+        playerInputHandler.AnnounceRightClick -= FlipRightClick;
+        playerInputHandler.AnnounceShift -= FlipShift;
+        playerInputHandler.AnnounceControl -= FlipControl;
+        leftHandInventory.AnnounceInventory -= EquipLeftHand;
+        rightHandInventory.AnnounceInventory -= EquipRightHand;
     }
 }

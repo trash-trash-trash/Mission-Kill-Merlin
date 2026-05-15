@@ -10,7 +10,6 @@ public class InventoryObjectBrain : MonoBehaviour
     public Inventory equippedInventory = null;
     public Health health;
     public ImpactDamageThreshold impact;
-    public LineArc lineArc;
     public Rigidbody rb;
     public Sound sound;
 
@@ -93,9 +92,6 @@ public class InventoryObjectBrain : MonoBehaviour
 
             health.canTakeDamage = false;
             impact.checkingForImpact = false;
-
-            lineArc.forwardReference = equippedInventory.forwardReference;
-            lineArc.startPoint = equippedInventory.equipPoint;
         }
         else
         {
@@ -103,8 +99,6 @@ public class InventoryObjectBrain : MonoBehaviour
             equipped = false;
             canEquip = true;
             canUse = false;
-            lineArc.forwardReference = null;
-            lineArc.startPoint = null;
 
             health.canTakeDamage = true;
             impact.checkingForImpact = true;
@@ -125,6 +119,7 @@ public class InventoryObjectBrain : MonoBehaviour
     public void Equip(Inventory inventory)
     {
         equippedInventory = inventory;
+        
         ChangeState(InventoryObjectState.Equipped);
     }
 

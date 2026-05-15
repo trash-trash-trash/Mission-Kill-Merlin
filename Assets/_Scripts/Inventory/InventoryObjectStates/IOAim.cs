@@ -6,11 +6,11 @@ public class IOAim : IOStateBase
     public override void OnEnable()
     {
         base.OnEnable();
-        inventoryObjectBrain.lineArc.drawingArc = true;
+        inventoryObjectBrain.equippedInventory.lineArc.drawingArc = true;
     }
 
     public void OnDisable()
     {
-        inventoryObjectBrain.lineArc.drawingArc = false;
+        inventoryObjectBrain.equippedInventory.lineArc.drawingArc = false;
     }
 }

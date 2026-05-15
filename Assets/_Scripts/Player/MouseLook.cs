@@ -17,6 +17,11 @@ public class MouseLook : MonoBehaviour
     public float x = 0;
     public float y = 0;
 
+    public float minYaw = -80f;
+    public float maxYaw = 80f;
+    public float minPitch = -80f;
+    public float maxPitch = 80f;
+
     void Start()
     {
         SetLook(100, 10);
@@ -43,15 +48,16 @@ public class MouseLook : MonoBehaviour
         y += lookInput.x * mouseSensitivity * Time.deltaTime;
         x -= lookInput.y * mouseSensitivity * Time.deltaTime;
 
-        x = Mathf.Clamp(x, -80f, 80f);
+        x = Mathf.Clamp(x, minPitch, maxPitch);
+        y = Mathf.Clamp(y, minYaw, maxYaw);
 
         ApplyRotation();
     }
 
     public void SetLook(float newYaw, float newPitch)
     {
-        y = newYaw;
-        x = Mathf.Clamp(newPitch, -80f, 80f);
+        y = Mathf.Clamp(newYaw, minYaw, maxYaw);
+        x = Mathf.Clamp(newPitch, minPitch, maxPitch);
 
         ApplyRotation();
     }

@@ -24,6 +24,8 @@ public class Inventory : MonoBehaviour
 
     public Transform forwardReference;
 
+    public LineArc lineArc;
+    
     public virtual void Equip(ItemBase obj)
     {
         inventoryObjects.Add(obj);
@@ -33,6 +35,9 @@ public class Inventory : MonoBehaviour
         objTransform.SetParent(equipPoint);
         objTransform.localPosition = equipPoint.localPosition;
         objTransform.localRotation = equipPoint.localRotation;
+        
+        lineArc.forwardReference = forwardReference;
+        lineArc.startPoint = equipPoint;
         
         CheckUnarmed();
     }
@@ -52,7 +57,10 @@ public class Inventory : MonoBehaviour
             inventoryObjects.Remove(obj);
             equippedItem = null;
         }
-
+        
+        lineArc.forwardReference = null;
+        lineArc.startPoint = null;
+        
         CheckUnarmed();
     }
     

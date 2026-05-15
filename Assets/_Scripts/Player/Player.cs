@@ -2,14 +2,18 @@ using UnityEngine;
 
 public class Player : CharacterBase
 {
-   //character base inherits from anthill. split up
+    public Transform playerBody;
+    
+    public static Player Instance { get; private set; }
 
-   [SerializeField]
-   private bool aggroAction;
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-   public bool AggroAction
-   {
-      get { return aggroAction; }
-      set { aggroAction = value; }
-   }
+        Instance = this;
+    }
 }

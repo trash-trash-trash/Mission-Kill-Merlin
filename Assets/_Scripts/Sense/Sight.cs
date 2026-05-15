@@ -28,8 +28,6 @@ public class Sight : MonoBehaviour, ISee
 
     public Transform eyes;
 
-    public CharacterBase playerCharacter;
-
     void OnTriggerStay(Collider other)
     {
         if (!canSee) return;
@@ -169,12 +167,7 @@ public class Sight : MonoBehaviour, ISee
         if (input)
         {
             Player newPlayer = player.GetComponent<Player>();
-            playerCharacter = newPlayer;
             AnnounceCanSeePlayer?.Invoke(newPlayer, true);
-        }
-        else
-        {
-            playerCharacter = null;
         }
     }
 
