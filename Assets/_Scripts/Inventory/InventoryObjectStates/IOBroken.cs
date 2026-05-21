@@ -16,7 +16,7 @@ public class IOBroken : IOStateBase
         MagicPotion mp = GetComponentInParent<MagicPotion>();
         if (mp != null)
         {
-            if (mp.magicPotionType != HealthStatus.Fine)
+            if (mp.magicPotionType != Effects.None)
             {
                 PuddleData newPuddleData = new PuddleData()
                 {

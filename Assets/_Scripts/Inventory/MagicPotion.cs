@@ -5,14 +5,14 @@ using UnityEngine;
 public class MagicPotion : InventoryObjectBrain
 {
     [Header("Fine is empty")]
-    public HealthStatus magicPotionType;
+    public Effects magicPotionType;
     
-    public event Action<HealthStatus> AnnounceBottleType;
+    public event Action<Effects> AnnounceBottleType;
     
     public List<GameObject> normalPotionParts;
     public List<GameObject> brokenPotionParts;
 
-    public void SetBottle(HealthStatus status)
+    public void SetBottle(Effects status)
     {
         magicPotionType = status;
         AnnounceBottleType?.Invoke(magicPotionType);

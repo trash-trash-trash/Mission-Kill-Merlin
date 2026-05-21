@@ -58,7 +58,7 @@ public class NPCAnthillBase : MonoBehaviour, ISense, IInteractable, IHear
         hp.ChangeHP(hp.maxHP);
     }
 
-    private void CheckArmed(Inventory inventory, List<ItemBase> aObj)
+    private void CheckArmed(Inventory inventory, List<InventoryObjectBrain> aObj)
     {
         if (inventory.equippedItem !=null)
             hasWeapon = true;
@@ -96,18 +96,18 @@ public class NPCAnthillBase : MonoBehaviour, ISense, IInteractable, IHear
         }
     }
 
-    private void SetStatus(List<HealthStatus> aHealthStatusList)
+    private void SetStatus(List<Effects> aHealthStatusList)
     {
-        HealthStatus newStatus = aHealthStatusList[0];
-        if (newStatus == HealthStatus.Asleep || newStatus == HealthStatus.Dead)
+        Effects newStatus = aHealthStatusList[0];
+        if (newStatus == Effects.Asleep || newStatus == Effects.Dead)
         {
             navMeshAgent.enabled = false;
             CanHear = false;
             sight.CanSee = false;
 
-            if (newStatus == HealthStatus.Asleep)
+            if (newStatus == Effects.Asleep)
                 awake = false;
-            else if (newStatus == HealthStatus.Dead)
+            else if (newStatus == Effects.Dead)
                 alive = false;
         }
         else
@@ -150,7 +150,7 @@ public class NPCAnthillBase : MonoBehaviour, ISense, IInteractable, IHear
                 alert = true;
         }
 
-        else if (obj.hp.HasEffect(HealthStatus.Asleep))
+        else if (obj.hp.HasEffect(Effects.Asleep))
         {
             MemoryData newMemory = new MemoryData()
             {

@@ -23,7 +23,7 @@ public class Gun : MonoBehaviour
         //move gunpoint to range
         equippedItemSo = aItemSo;
         Vector3 localPos = pointB.localPosition;
-        localPos.x = aItemSo.range;
+      //  localPos.x = aItemSo.range;
         pointB.localPosition = localPos;
     }
     
@@ -117,15 +117,15 @@ public class Gun : MonoBehaviour
                     {
                         //add force
                         Vector3 weaponForceDir = (rb.position - hit.point).normalized;
-                        Vector3 shoveVelocity = weaponForceDir * equippedItemSo.weaponForce;
-                        rb.linearVelocity = shoveVelocity;
+                       // Vector3 shoveVelocity = weaponForceDir * equippedItemSo.weaponForce;
+                      //  rb.linearVelocity = shoveVelocity;
 
                         //add torque
                         Vector3 shoveDirection = (rb.position - hit.point).normalized;
                         Vector3 randomOffset = Random.insideUnitSphere * 0.2f;
                         Vector3 torqueAxis = Vector3.Cross(Vector3.up, shoveDirection + randomOffset).normalized;
 
-                        rb.AddTorque(torqueAxis * equippedItemSo.weaponForceTorque, ForceMode.Impulse);
+                       // rb.AddTorque(torqueAxis * equippedItemSo.weaponForceTorque, ForceMode.Impulse);
                     }
                 }
                 

@@ -10,7 +10,7 @@ public class GlowingMatsDict : MonoBehaviour
     public Material healMat;
     public Material lightningMat;
 
-    public Dictionary<HealthStatus, Material> materialsDict = new Dictionary<HealthStatus, Material>();
+    public Dictionary<Effects, Material> materialsDict = new Dictionary<Effects, Material>();
 
     private void Awake()
     {
@@ -23,13 +23,13 @@ public class GlowingMatsDict : MonoBehaviour
         Instance = this;
 
         // DontDestroyOnLoad(gameObject);
-        materialsDict.Add(HealthStatus.Bleeding, bleedMat);
-        materialsDict.Add(HealthStatus.Burning, burningMat);
-        materialsDict.Add(HealthStatus.Healing, healMat);
-        materialsDict.Add(HealthStatus.Lightning, lightningMat);
+        materialsDict.Add(Effects.Bleeding, bleedMat);
+        materialsDict.Add(Effects.Burning, burningMat);
+        materialsDict.Add(Effects.Healing, healMat);
+        materialsDict.Add(Effects.Lightning, lightningMat);
     }
 
-    public Material GetMaterial(HealthStatus status)
+    public Material GetMaterial(Effects status)
     {
         materialsDict.TryGetValue(status, out Material mat);
         return mat;

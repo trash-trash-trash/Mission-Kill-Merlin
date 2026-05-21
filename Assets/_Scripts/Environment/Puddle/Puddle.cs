@@ -7,7 +7,7 @@ public struct PuddleData
 {
     public CharacterBase owner;
     
-    public HealthStatus associatedStatus;
+    public Effects associatedStatus;
     public int secondsRemainingCharge;
     public float expiryTimerDecayRate;
     
@@ -86,7 +86,7 @@ public class Puddle : MonoBehaviour
                 {
                     amount = 2,
                     charges = 2,
-                    type = data.associatedStatus
+                    effect = data.associatedStatus
                 };
                 health.AddEffect(effect);
             }

@@ -19,8 +19,8 @@ public class PlayerInventory : MonoBehaviour
     public Inventory leftHandInventory;
     public Inventory rightHandInventory;
 
-    public ItemBase leftHandObject = null;
-    public ItemBase rightHandObject = null;
+    public InventoryObjectBrain leftHandObject = null;
+    public InventoryObjectBrain rightHandObject = null;
 
     public Use use;
 
@@ -37,12 +37,12 @@ public class PlayerInventory : MonoBehaviour
         rightHandInventory.AnnounceInventory += EquipRightHand;
     }
 
-    private void EquipRightHand(Inventory aRg1, List<ItemBase> aRg2)
+    private void EquipRightHand(Inventory aRg1, List<InventoryObjectBrain> aRg2)
     {
         rightHandObject = aRg1.equippedItem;
     }
 
-    private void EquipLeftHand(Inventory aRg1, List<ItemBase> aRg2)
+    private void EquipLeftHand(Inventory aRg1, List<InventoryObjectBrain> aRg2)
     {
         leftHandObject = aRg1.equippedItem;
     }
@@ -77,7 +77,7 @@ public class PlayerInventory : MonoBehaviour
     {
         ref bool clickHeld = ref (isLeft ? ref leftClickHeld : ref rightClickHeld);
         ref bool startedAsAim = ref (isLeft ? ref leftClickStartedAsAim : ref rightClickStartedAsAim);
-        ItemBase item = isLeft ? leftHandObject : rightHandObject;
+        InventoryObjectBrain item = isLeft ? leftHandObject : rightHandObject;
 
         if (input.performed)
         {

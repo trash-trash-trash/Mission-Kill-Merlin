@@ -11,7 +11,7 @@ public class PuddleController : MonoBehaviour
     public List<GameObject> availablePuddles = new List<GameObject>();
     public List<GameObject> unavailablePuddles = new List<GameObject>();
 
-    public HealthStatus testStatus;
+    public Effects testStatus;
     public int testChargeCount;
     public float testDecay;
     

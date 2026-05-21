@@ -14,11 +14,11 @@ public class Inventory : MonoBehaviour
         set { unarmed = value; }
     }
 
-    public event Action<Inventory, List<ItemBase>> AnnounceInventory;
+    public event Action<Inventory, List<InventoryObjectBrain>> AnnounceInventory;
 
-    public List<ItemBase> inventoryObjects = new List<ItemBase>();
+    public List<InventoryObjectBrain> inventoryObjects = new List<InventoryObjectBrain>();
 
-    public ItemBase equippedItem;
+    public InventoryObjectBrain equippedItem;
 
     public Transform equipPoint;
 
@@ -26,7 +26,7 @@ public class Inventory : MonoBehaviour
 
     public LineArc lineArc;
     
-    public virtual void Equip(ItemBase obj)
+    public virtual void Equip(InventoryObjectBrain obj)
     {
         inventoryObjects.Add(obj);
         equippedItem = obj;
@@ -39,6 +39,9 @@ public class Inventory : MonoBehaviour
         lineArc.forwardReference = forwardReference;
         lineArc.startPoint = equipPoint;
         
+        obj.Equip(this);
+        obj.HandleEquipped(true);
+        
         CheckUnarmed();
     }
 
@@ -49,7 +52,7 @@ public class Inventory : MonoBehaviour
         equippedItem.Use();
     }
 
-    public void Unequip(ItemBase obj)
+    public void Unequip(InventoryObjectBrain obj)
     {
         if (inventoryObjects.Contains(obj))
         {
@@ -60,6 +63,8 @@ public class Inventory : MonoBehaviour
         
         lineArc.forwardReference = null;
         lineArc.startPoint = null;
+        
+        obj.HandleEquipped(false);
         
         CheckUnarmed();
     }

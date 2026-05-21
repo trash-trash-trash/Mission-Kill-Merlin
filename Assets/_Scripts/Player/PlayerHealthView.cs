@@ -30,25 +30,25 @@ public class PlayerHealthView : MonoBehaviour
         slider.value = hp;
     }
 
-    private void UpdateStatuses(List<HealthStatus> aHealthStatusList)
+    private void UpdateStatuses(List<Effects> aHealthStatusList)
     {
         RefreshStatuses();
     }
 
     private void RefreshStatuses()
     {
-        var counts = new Dictionary<HealthStatus, int>();
+        var counts = new Dictionary<Effects, int>();
 
         foreach (EffectStatus status in health.effects)
         {
-            if (!counts.ContainsKey(status.type))
-                counts[status.type] = 0;
+            if (!counts.ContainsKey(status.effect))
+                counts[status.effect] = 0;
 
-            counts[status.type]++;
+            counts[status.effect]++;
         }
 
         int index = 0;
-        foreach (KeyValuePair<HealthStatus, int> pair in counts)
+        foreach (KeyValuePair<Effects, int> pair in counts)
         {
             GameObject obj;
 

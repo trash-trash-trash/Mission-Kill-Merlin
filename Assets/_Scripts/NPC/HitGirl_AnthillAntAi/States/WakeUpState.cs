@@ -47,7 +47,7 @@ public class WakeupState : NPCAnthillStateBase
     {
         base.Execute(aDeltaTime, aTimeScale);  
         
-        if (!sleepingChar.hp.HasEffect(HealthStatus.Asleep))
+        if (!sleepingChar.hp.HasEffect(Effects.Asleep))
             hasWokenUp = true;
 
         if(hasWokenUp)
@@ -86,7 +86,7 @@ public class WakeupState : NPCAnthillStateBase
         while (countdown > 0f)
         {
             //stop if character woke up early, ie by someone else
-            if (sleepingChar == null || !sleepingChar.hp.HasEffect(HealthStatus.Asleep))
+            if (sleepingChar == null || !sleepingChar.hp.HasEffect(Effects.Asleep))
             {
                 hasWokenUp = true;
                 wakeupCoroutine = null;
@@ -97,7 +97,7 @@ public class WakeupState : NPCAnthillStateBase
             countdown -= Time.fixedDeltaTime;
         }
 
-        if (sleepingChar != null && !sleepingChar.hp.HasEffect(HealthStatus.Asleep))
+        if (sleepingChar != null && !sleepingChar.hp.HasEffect(Effects.Asleep))
         {
             IInteractable interactable = sleepingChar.GetComponent<IInteractable>();
             interactable?.Interact(scenarioBrain.patrol, CharacterActions.WakeUp);

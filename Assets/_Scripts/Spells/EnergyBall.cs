@@ -13,6 +13,7 @@ public enum EnergyBallType
 
 public class EnergyBall : MonoBehaviour
 {
+    
     public Transform owner;
     
     public Transform startPoint;
@@ -32,15 +33,15 @@ public class EnergyBall : MonoBehaviour
     public bool active = true;
     
     public EnergyBallType myEnergyType = EnergyBallType.Fire;
-    public HealthStatus statusAffliction;
+    public Effects statusAffliction;
     
     
     public LayerMask layersToIgnore;
     
-    public Dictionary<EnergyBallType, HealthStatus> energyBallTypeToHealthStatusDict =
+    public Dictionary<EnergyBallType, Effects> energyBallTypeToHealthStatusDict =
         new()
         {
-            [EnergyBallType.Fire] = HealthStatus.Burning
+            [EnergyBallType.Fire] = Effects.Burning
         };
 
     public event Action<GameObject> AnnounceExploded;
@@ -56,7 +57,7 @@ public class EnergyBall : MonoBehaviour
     {
         transform.DetachChildren();
     }
-
+    
     public void Init()
     {
         transform.position = startPoint.position;
@@ -69,7 +70,7 @@ public class EnergyBall : MonoBehaviour
 
         dir = (endPoint.position - startPoint.position).normalized;
 
-        if (energyBallTypeToHealthStatusDict.TryGetValue(myEnergyType, out HealthStatus status))
+        if (energyBallTypeToHealthStatusDict.TryGetValue(myEnergyType, out Effects status))
         {
             statusAffliction = status;
         }

@@ -12,6 +12,6 @@ public class IOUse : IOStateBase
     IEnumerator HackWait()
     {
         yield return new WaitForFixedUpdate();
-        ItemUseCase.Instance.UseItem(inventoryObjectBrain.itemBase, inventoryObjectBrain.equippedInventory);
+        ItemUseCase.Instance.UseItem(inventoryObjectBrain, inventoryObjectBrain.equippedInventory);
     }
 }

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class InventoryObjectBrain : MonoBehaviour
+public class InventoryObjectBrain : MonoBehaviour, IInventoryObject
 {
     public ItemSO itemSO;
-    public ItemBase itemBase;
     public Inventory equippedInventory = null;
     public Health health;
     public ImpactDamageThreshold impact;
@@ -29,7 +28,7 @@ public class InventoryObjectBrain : MonoBehaviour
 
     public Dictionary<InventoryObjectState, GameObject> statesDict;
 
-    private void Awake()
+    public virtual void Awake()
     {
         statesDict = new Dictionary<InventoryObjectState, GameObject>()
         {
@@ -51,13 +50,13 @@ public class InventoryObjectBrain : MonoBehaviour
     }
 
 
-    private void ItemHealthBroke(int aObj)
+    public virtual void ItemHealthBroke(int aObj)
     {
         if (aObj <= 0)
             ChangeState(InventoryObjectState.Broken);
     }
 
-    private void ItemImpactBroke(float aObj)
+    public virtual void ItemImpactBroke(float aObj)
     {
         ChangeState(InventoryObjectState.Broken);
     }
@@ -77,7 +76,7 @@ public class InventoryObjectBrain : MonoBehaviour
         currentState = newState;
     }
 
-    public void HandleEquipped(bool input)
+    public virtual void HandleEquipped(bool input)
     {
         if (input)
         {
@@ -105,7 +104,7 @@ public class InventoryObjectBrain : MonoBehaviour
 
             if (equippedInventory != null)
             {
-                equippedInventory.Unequip(itemBase);
+                equippedInventory.Unequip(this);
                 equippedInventory = null;
             }
         }
@@ -164,6 +163,11 @@ public class InventoryObjectBrain : MonoBehaviour
     public GameObject ReturnSelf()
     {
         return gameObject;
+    }
+
+    public InventoryObjectBrain ReturnItemBase()
+    {
+        return this;
     }
 
     public ItemSO ReturnItemSO()

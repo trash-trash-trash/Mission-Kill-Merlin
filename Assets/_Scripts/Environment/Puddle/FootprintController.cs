@@ -17,7 +17,7 @@ public class FootprintController : MonoBehaviour
     public Health health;
     
     //combine 
-    public HealthStatus mostRecentStatus;
+    public Effects mostRecentStatus;
 
     public Transform transformToSpawnAt;
 
@@ -31,7 +31,7 @@ public class FootprintController : MonoBehaviour
         if (aHealthStatusList.Count > 0)
         {
             spawningFootsteps = true;
-            mostRecentStatus = aHealthStatusList[0].type;
+            mostRecentStatus = aHealthStatusList[0].effect;
         }
         else
         {
@@ -73,7 +73,7 @@ public class FootprintController : MonoBehaviour
         Debug.DrawLine(transformToSpawnAt.position, spawnPos, Color.blue, 1f);
     }
 
-    private PuddleData CreatePuddleData(HealthStatus newStatus)
+    private PuddleData CreatePuddleData(Effects newStatus)
     {
         PuddleController puddleController = PuddleController.Instance;
         return new PuddleData()

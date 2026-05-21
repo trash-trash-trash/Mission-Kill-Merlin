@@ -63,7 +63,7 @@ public interface IInventoryObject
 
     public GameObject ReturnSelf();
     
-    public ItemBase ReturnItemBase();
+    public InventoryObjectBrain ReturnItemBase();
 
     public ItemSO ReturnItemSO();
 }

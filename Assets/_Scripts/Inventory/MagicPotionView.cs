@@ -14,7 +14,7 @@ public class MagicPotionView : MonoBehaviour
         SetBottle(mP.magicPotionType);
     }
 
-    private void SetBottle(HealthStatus potionType)
+    private void SetBottle(Effects potionType)
     {
         if (GlowingMatsDict.Instance.materialsDict.TryGetValue(potionType, out Material material))
         {

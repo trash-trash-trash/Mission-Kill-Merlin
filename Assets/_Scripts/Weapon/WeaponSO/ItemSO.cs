@@ -6,14 +6,8 @@ public class ItemSO : ScriptableObject
 {
     public string name;
     public string abilityString;
-    
-    public float range;
-    public float fireRate;
 
-    public int weaponDamage;
-    
-    public float weaponForce;
-    public float weaponForceTorque;
+    public AttackInfo attackInfo;
     public Sprite weaponSprite;
 
     public InventoryObjectType  inventoryObjectType;

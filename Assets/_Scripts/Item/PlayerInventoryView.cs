@@ -6,8 +6,8 @@ using UnityEngine.UI;
 [System.Serializable]
 public class PlayerInventoryView : MonoBehaviour
 {
-    public ItemBase leftEquippedItem;
-    public ItemBase rightEquippedItem;
+    public InventoryObjectBrain leftEquippedItem;
+    public InventoryObjectBrain rightEquippedItem;
     public ItemSO emptyFistSO;
 
     public Image leftHandImage;
@@ -25,7 +25,7 @@ public class PlayerInventoryView : MonoBehaviour
     }
 
 
-    private void HandleLeftInventory(Inventory inventory, List<ItemBase> aRg2)
+    private void HandleLeftInventory(Inventory inventory, List<InventoryObjectBrain> aRg2)
     {
         if (inventory.equippedItem != null)
         {
@@ -37,7 +37,7 @@ public class PlayerInventoryView : MonoBehaviour
         }
     }
 
-    private void HandleRightInventory(Inventory inventory, List<ItemBase> aRg2)
+    private void HandleRightInventory(Inventory inventory, List<InventoryObjectBrain> aRg2)
     {
         if (inventory.equippedItem != null)
         {
@@ -49,7 +49,7 @@ public class PlayerInventoryView : MonoBehaviour
         }
     }
 
-    void Equip(Inventory inventory, ItemBase equippedItem)
+    void Equip(Inventory inventory, InventoryObjectBrain equippedItem)
     {
         if (inventory == leftHandInventory)
         {

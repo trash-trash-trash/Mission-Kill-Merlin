@@ -23,15 +23,15 @@ public class ItemUseCase : MonoBehaviour
         if (itemSO.inventoryObjectType == InventoryObjectType.PotionBottle)
         {
             MagicPotion potion = itemBase.ReturnSelf().GetComponent<MagicPotion>();
-            HealthStatus statusType = potion.magicPotionType;
-            if(statusType==HealthStatus.Fine)
+            Effects statusType = potion.magicPotionType;
+            if(statusType==Effects.None)
                 Debug.Log("Tried to fill empty bottle!");
             else
             {
                 Debug.Log("Drinking from magic bottle! Added "+potion.magicPotionType+" to self!");
-                targetInventory.owner.hp.ChangeHP(itemSO.weaponDamage);
+                targetInventory.owner.hp.ChangeHP(itemSO.attackInfo.damage);
                 targetInventory.Unequip(itemBase.ReturnItemBase());
-                potion.SetBottle(HealthStatus.Fine);
+                potion.SetBottle(Effects.None);
                 targetInventory.Equip(itemBase.ReturnItemBase());
             }
             // 

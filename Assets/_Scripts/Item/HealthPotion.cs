@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HealthPotion : ItemBase
+public class HealthPotion : InventoryObjectBrain
 {
     // public override void Equip()
     // {

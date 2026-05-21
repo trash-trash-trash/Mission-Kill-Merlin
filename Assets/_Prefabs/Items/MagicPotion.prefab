@@ -383,7 +383,6 @@ GameObject:
   - component: {fileID: 3226268408418761964}
   - component: {fileID: 6153966356846276244}
   - component: {fileID: 4228417094759549417}
-  - component: {fileID: 7052040702249061542}
   - component: {fileID: 4638937528963168455}
   - component: {fileID: 4521647262610983046}
   - component: {fileID: 1632618939188423473}
@@ -510,11 +509,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MagicPotion
   itemSO: {fileID: 11400000, guid: 6330d458f89e564468e986da70655bb2, type: 2}
-  itemBase: {fileID: 7052040702249061542}
   equippedInventory: {fileID: 0}
   health: {fileID: 1632618939188423473}
   impact: {fileID: 4521647262610983046}
-  lineArc: {fileID: 0}
   rb: {fileID: 4638937528963168455}
   sound: {fileID: 619728554208797949}
   canEquip: 1
@@ -540,19 +537,6 @@ MonoBehaviour:
   - {fileID: 419073142677016326}
   - {fileID: 7593700316889197687}
   - {fileID: 2011226268113757058}
---- !u!114 &7052040702249061542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3086634771080653942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdde3ae998a3b8b4782df1df8e6d9407, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ItemBase
-  brain: {fileID: 4228417094759549417}
 --- !u!54 &4638937528963168455
 Rigidbody:
   m_ObjectHideFlags: 0

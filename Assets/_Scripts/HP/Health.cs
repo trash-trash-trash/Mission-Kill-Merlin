@@ -2,20 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public enum HealthStatus
-{
-    Fine,
-    Bleeding,
-    BleedingAesthetic,
-    Burning,
-    Healing,
-    Wet,
-    Asleep,
-    Lightning,
-    Dead
-}
-
 public class Health : MonoBehaviour
 {
     //condense...
@@ -44,6 +30,11 @@ public class Health : MonoBehaviour
 
     public bool CanChangeHP { get; private set; } = true;
 
+    private void Awake()
+    {
+        ChangeHP(maxHP);
+    }
+
     public int CurrentHP
     {
         get { return currentHP; }
@@ -61,9 +52,9 @@ public class Health : MonoBehaviour
     public void AddEffect(EffectStatus effect)
     {
         //water removes fire :)
-        if (effect.type == HealthStatus.Wet)
+        if (effect.effect == Effects.Wet)
         {
-            RemoveEffect(HealthStatus.Burning);
+            RemoveEffect(Effects.Burning);
         }
 
         effects.Add(effect);
@@ -71,18 +62,18 @@ public class Health : MonoBehaviour
         AnnounceHealthStatus?.Invoke(effects);
     }
 
-    public void RemoveEffect(HealthStatus status)
+    public void RemoveEffect(Effects status)
     {
-        effects.RemoveAll(e => e.type == status);
+        effects.RemoveAll(e => e.effect == status);
 
         AnnounceHealthStatus?.Invoke(effects);
     }
 
-    public bool HasEffect(HealthStatus type)
+    public bool HasEffect(Effects type)
     {
         foreach (EffectStatus effect in effects)
         {
-            if (effect.type == type)
+            if (effect.effect == type)
                 return true;
         }
 

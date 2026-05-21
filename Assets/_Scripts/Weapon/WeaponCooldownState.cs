@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IOEquipped : IOStateBase
+public class WeaponCooldownState : WeaponBaseState
 {
     public override void OnEnable()
     {
